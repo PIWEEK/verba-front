@@ -9,7 +9,10 @@ const successRequest = 200;
 const failRequest = 400;
 let quotes = [];
 
+
+
 function getApiQuotes() {
+
   requestQuotes.open('GET', quotesApi, true);
 
   requestQuotes.onload = function() {
@@ -17,9 +20,10 @@ function getApiQuotes() {
       let data = JSON.parse(requestQuotes.responseText);
       for (var i = 0; i < data.length; i++) {
        let quote = {
-        text: data[i].text,
+         text: data[i].text,
       };
       quotes.push(quote);
+      printQuotes();
       }
       console.log(quotes);
     } else {
@@ -37,3 +41,13 @@ function getApiQuotes() {
 }
 
 getApiQuotes();
+
+function printQuotes() {
+  const quoteContainer = document.querySelector('.quotes-container');
+  quoteContainer.innerHTML = "";
+  for (var i = 0; i < quotes.length; i++) {
+   quoteContainer.innerHTML += `
+   <p>"${quotes[i].text}"</p>
+   `;
+}
+}
