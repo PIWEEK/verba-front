@@ -1,42 +1,39 @@
 'use strict';
 
-const request = new XMLHttpRequest();
-const mainApi = 'https://verba.com';
+const requestAuthor = new XMLHttpRequest();
+const requestQuotes = new XMLHttpRequest();
+const mainApi = 'http://localhost:8000/api/';
+const quotesApi= mainApi + 'quotes/';
+const authorsApi= mainApi + 'authors/';
 const successRequest = 200;
 const failRequest = 400;
+let quotes = [];
 
-function getApiData() {
-  request.open('GET', mainApi, true);
+function getApiQuotes() {
+  requestQuotes.open('GET', quotesApi, true);
 
-  request.onload = function() {
-    if (request.status >= successRequest && request.status < failRequest) {
-      let data = JSON.parse(request.responseText);
-      let quote = {
-        name: data.Author.name,
-        birth: data.Author.birth_date || 'No hay fecha de nacimiento',
-        death: data.Author.death_date || 'No hay fecha de defunción',
-        picture: data.Author.image || 'placeholder',
-        pictureAlt: data.Author.image_alt ||'No hay descripción de imagen',
-        bio: data.Author.bio || 'No hay bio',
-        wikiLink: data.Author.wiki_link || 'No hay link disponible',
-        text: data.Quote.text,
-        date: data.Quote.date || "No hay fecha",
-        source: data.Quote.source || " No hay fuente disponible",
+  requestQuotes.onload = function() {
+    if (requestQuotes.status >= successRequest && requestQuotes.status < failRequest) {
+      let data = JSON.parse(requestQuotes.responseText);
+      for (var i = 0; i < data.length; i++) {
+       let quote = {
+        text: data[i].text,
       };
-
+      quotes.push(quote);
+      }
+      console.log(quotes);
     } else {
       console.log('Error del servidor, puede que el archivo no exista o que se haya producido un error interno en el servidor');
     }
-    return quote;
+    return quotes;
   };
 
-  request.onerror = function() {
+  requestQuotes.onerror = function() {
     console.log('Error al tratar de conectarse con el servidor');
   };
 
-  request.send();
-  return quote;
+  requestQuotes.send();
+  return quotes;
 }
 
-function printQuote(quote) {
-}
+getApiQuotes();
