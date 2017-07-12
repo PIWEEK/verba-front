@@ -28,7 +28,7 @@ function getApiQuotes() {
       for (var i = 0; i < quotesData.results.length; i++) {
         let quote = {
           text: quotesData.results[i].text,
-          //authorLink: quotesData.results[i].author,
+          author: quotesData.results[i].author.name,
         };
         quotes.push(quote);
         printQuotes();
@@ -55,6 +55,7 @@ function printQuotes() {
     quoteContainer.innerHTML += `
     <div class="card">
       <h1>'${quotes[i].text}'</h1>
+      <h2>${quotes[i].author}</h2>
     </div>
    `;
   }
@@ -70,6 +71,7 @@ function getMoreQuotes() {
       for (var i = 0; i < moreQuotesData.results.length; i++) {
         let quote = {
           text: moreQuotesData.results[i].text,
+          author: moreQuotesData.results[i].author.name,
         };
         quotes.push(quote);
         printQuotes();

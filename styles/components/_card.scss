@@ -1,5 +1,8 @@
 .quotes-container {
   display: flex;
+  flex-wrap: wrap;
+  margin-left: $margin-frame;
+  margin-right: $margin-frame;
 }
 
 .card {
@@ -7,4 +10,21 @@
   height: 360px;
   background-color: #ffffff;
   box-shadow: 0 8px 30px 0 #d6d6d6;
+  margin: 15px;
+  padding: 40px;
+  h1 {
+    font-family: 'Merriweather';
+    font-size: 24px;
+    font-weight: bold;
+    line-height: 1.5;
+    text-align: left;
+    color: #000000;
+  }
+
+  h2 {
+    font-family: 'Merriweather';
+    font-size: 16px;
+    text-align: left;
+    color: #000000;
+  }
 }

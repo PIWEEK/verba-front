@@ -1,3 +1,15 @@
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box; }
+
+header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between; }
+
 .filter-modal {
   background-color: rgba(0, 0, 255, 0.8);
   position: fixed;
@@ -12,34 +24,61 @@
   margin-left: auto;
   height: 100vh; }
 
-.nav li {
-  display: inline-block;
-  font-family: Merriweather;
-  font-size: 20px;
-  font-weight: bold;
-  line-height: 1.8;
-  text-align: center;
-  color: #000000; }
-.nav button {
-  border: solid 4px #0f00ff;
-  font-family: Inconsolata;
-  font-size: 14px;
-  font-weight: bold;
-  text-align: center;
-  color: #000000;
-  background-color: white; }
+.nav {
+  margin-right: 72px; }
+  .nav li {
+    display: inline-block;
+    font-family: 'Merriweather';
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 1.8;
+    text-align: center;
+    color: #000000; }
+  .nav button {
+    border: solid 4px #0f00ff;
+    font-family: 'Inconsolata';
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    color: #000000;
+    background-color: white; }
+
+.logo-container {
+  margin-left: 72px;
+  width: 200px;
+  height: 62px;
+  -o-object-fit: contain;
+     object-fit: contain; }
 
 .quotes-container {
   display: -webkit-box;
   display: -ms-flexbox;
-  display: flex; }
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  margin-left: 72px;
+  margin-right: 72px; }
 
 .card {
   width: 360px;
   height: 360px;
   background-color: #ffffff;
   -webkit-box-shadow: 0 8px 30px 0 #d6d6d6;
-          box-shadow: 0 8px 30px 0 #d6d6d6; }
+          box-shadow: 0 8px 30px 0 #d6d6d6;
+  margin: 15px;
+  padding: 40px; }
+  .card h1 {
+    font-family: 'Merriweather';
+    font-size: 24px;
+    font-weight: bold;
+    line-height: 1.5;
+    text-align: left;
+    color: #000000; }
+  .card h2 {
+    font-family: 'Merriweather';
+    font-size: 16px;
+    text-align: left;
+    color: #000000; }
 
 .hidden {
   display: none; }

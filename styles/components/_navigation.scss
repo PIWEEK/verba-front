@@ -1,7 +1,8 @@
 .nav {
+  margin-right: $margin-frame;
   li {
     display: inline-block;
-    font-family: Merriweather;
+    font-family: 'Merriweather';
     font-size: 20px;
     font-weight: bold;
     line-height: 1.8;
@@ -11,11 +12,18 @@
 
   button {
     border: solid 4px #0f00ff;
-    font-family: Inconsolata;
+    font-family: 'Inconsolata';
     font-size: 14px;
     font-weight: bold;
     text-align: center;
     color: #000000;
     background-color: white;
   }
+}
+
+.logo-container{
+  margin-left: $margin-frame;
+  width: 200px;
+  height: 62px;
+  object-fit: contain;
 }
