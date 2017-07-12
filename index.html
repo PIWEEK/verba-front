@@ -4,14 +4,35 @@
     <meta charset="utf-8">
     <title> Verba</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <link rel="stylesheet" href="styles/index.css"> -->
+    <link rel="stylesheet" href="styles/index.css">
 
   </head>
   <body>
-    <div class="quotes-container">
-      <p> Hola Mundo</p>
-    </div>
-    <button class="button-quote" type="button" name="button">Más citas chachis</button>
-  <script src="scripts/main.js" charset="utf-8"></script>
+    <header>
+      <div class="logo-container">
+        <p>Verba.</p>
+      </div>
+      <div class="nav-container">
+        <ul class="nav">
+          <li>Manifiesto</li>
+          <li>Apóyanos</li>
+          <li><button type="button" name="button" class="js-filter-btn">Filtro</button></li>
+        </ul>
+      </div>
+    </header>
+
+    <main>
+      <div class="quotes-container">
+      </div>
+      <button class="js-load-quotes-btn" type="button" name="button">Más citas chachis</button>
+
+      <div class="filter-modal js-filter-modal hidden">
+        <div class="filter-modal-content">
+          <button type="button" name="button" class="js-close-btn">X</button>
+        </div>
+      </div>
+    </main>
+
+<script src="scripts/main.js" charset="utf-8"></script>
   </body>
 </html>

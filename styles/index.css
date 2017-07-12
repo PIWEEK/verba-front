@@ -1,0 +1,18 @@
+.filter-modal {
+  background-color: rgba(0, 0, 255, 0.8);
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0; }
+
+.filter-modal-content {
+  background-color: white;
+  width: 75%;
+  margin-left: auto;
+  height: 100vh; }
+
+.hidden {
+  display: none; }
+
+/*# sourceMappingURL=index.css.map */
