@@ -53,7 +53,9 @@ function printQuotes() {
   quoteContainer.innerHTML = '';
   for (var i = 0; i < quotes.length; i++) {
     quoteContainer.innerHTML += `
-   <p>'${quotes[i].text}'</p>
+    <div class="card">
+      <h1>'${quotes[i].text}'</h1>
+    </div>
    `;
   }
 }

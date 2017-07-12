@@ -12,6 +12,35 @@
   margin-left: auto;
   height: 100vh; }
 
+.nav li {
+  display: inline-block;
+  font-family: Merriweather;
+  font-size: 20px;
+  font-weight: bold;
+  line-height: 1.8;
+  text-align: center;
+  color: #000000; }
+.nav button {
+  border: solid 4px #0f00ff;
+  font-family: Inconsolata;
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+  color: #000000;
+  background-color: white; }
+
+.quotes-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex; }
+
+.card {
+  width: 360px;
+  height: 360px;
+  background-color: #ffffff;
+  -webkit-box-shadow: 0 8px 30px 0 #d6d6d6;
+          box-shadow: 0 8px 30px 0 #d6d6d6; }
+
 .hidden {
   display: none; }
 
