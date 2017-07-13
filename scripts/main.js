@@ -2,11 +2,9 @@
 //////////// API request ///////////
 const requestAuthor = new XMLHttpRequest();
 const requestQuotes = new XMLHttpRequest();
-const requestMoreQuotes = new XMLHttpRequest();
 const requestAuthorsList = new XMLHttpRequest();
-const authorsApi = mainApi + 'authors/';
 const mainApi = 'http://verba.piweek.com/api/';
-const quotesApi = mainApi + 'quotes/';
+const authorsApi = mainApi + 'authors/?page_size=200';
 const successRequest = 200;
 const failRequest = 400;
 let quotes = [];
