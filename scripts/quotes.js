@@ -1,7 +1,10 @@
 let Quote = (function(){
 
     let quote = {};
-    quote.nextQuoteUrl = 'http://verba.piweek.com/api/quotes';
+
+    let quoteContainer = $(document).find('.quotes-container');
+
+    quote.nextQuotesUrl = 'http://verba.piweek.com/api/quotes';
 
     let print = function(quote) {
         let text = quote.text;
@@ -36,11 +39,11 @@ let Quote = (function(){
 
     quote.getQuotes = function() {
 
-        $.get(quote.nextQuoteUrl, function(quotesData, status) {
+        $.get(quote.nextQuotesUrl, function(quotesData, status) {
             let quotes = [];
 
             if (status === 'success') {
-                quote.nextQuoteUrl = quotesData.next;
+                quote.nextQuotesUrl = quotesData.next;
 
                 for (let i = 0; i < quotesData.results.length; i++) {
                     let quoteResult = quotesData.results[i];
@@ -59,6 +62,13 @@ let Quote = (function(){
 
         });
 
+    };
+
+    quote.getFilteredQuotes = function(filterUrl) {
+        quote.nextQuotesUrl = filterUrl;
+        quoteContainer.html('');
+
+        Quote.getQuotes();
     };
 
     quote.toggleDetailAndList = function() {

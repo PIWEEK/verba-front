@@ -8,8 +8,6 @@ const filterQuotesApi = quotesApi + '?author=31';
 let authors = [];
 let tags = [];
 let filteredQuotes = [];
-const getButtonQuote = $(document).find('.js-load-quotes-btn');
-const quoteContainer = $(document).find('.quotes-container');
 const authorsContainer = $(document).find('.js-authors-container');
 const tagsContainer = $(document).find('.js-tags-container');
 const authorsButton = $(document).find('.js-authors-link');
@@ -41,7 +39,9 @@ $(document).on('click', '.author-btn', function(event){
 });
 
 
-getButtonQuote.click(Quote.getQuotes());
+$('.js-load-quotes-btn').click(function() {
+    Quote.getQuotes()
+});
 
 $('.js-back-btn').click(function() {
     Quote.toggleDetailAndList();
@@ -84,25 +84,6 @@ function getTagsList() {
     });
 }
 
-function filterQuotes() {
-    $.get(filterQuotesApi, function(filterQuotesData, status) {
-        if (status === 'success') {
-            for (var i = 0; i < filterQuotesData.results.length; i++) {
-                let filterQuote = {
-                    text: filterQuotesData.results[i].text,
-                    author: filterQuotesData.results[i].author.name,
-                };
-                filteredQuotes.push(filterQuote);
-                console.log(filterQuote.text);
-                console.log(filterQuote.author);
-            }
-        } else {
-            console.log('Error del servidor, puede que el archivo no exista o que se haya producido un error interno en el servidor');
-        }
-        return filteredQuotes;
-    });
-}
-
 function printAuthors() {
     authorsContainer.toggleClass('hidden');
     let htmlAuthor = '';
@@ -133,20 +114,22 @@ function printTags() {
     tagsContainer.html(htmlTag);
 }
 
-authorsButton.click(printAuthors);
-tagsButton.click(printTags);
-
 getAuthorsList();
 getTagsList();
 
+authorsButton.click(printAuthors);
+tagsButton.click(printTags);
+
+filterQuotesButton.click(function() {
+    Quote.getFilteredQuotes(filterQuotesApi);
+    modalToggle();
+});
 
 //////////// Modal///////////
-
 function modalToggle() {
     $(document).find('.js-filter-modal').toggleClass('hidden');
     $(document).find('body').toggleClass('overflow-hidden');
 }
 
 filterButton.click(modalToggle);
-filterQuotesButton.click(filterQuotes);
 closeFilterButton.click(modalToggle);
