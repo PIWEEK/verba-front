@@ -131,6 +131,18 @@ header {
     text-align: left;
     color: #000000; }
 
+.quote-tag {
+    -webkit-box-shadow: 0 8px 8px 0 rgba(227, 227, 227, 0.38);
+    box-shadow: 0 8px 8px 0 rgba(227, 227, 227, 0.38);
+    display: inline-block;
+    font-family: Inconsolata;
+    font-size: 14px;
+    text-align: center;
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-top: 8px;
+    padding-bottom: 8px; }
+
 .quote-detail-container {
   display: -webkit-box;
   display: -ms-flexbox;

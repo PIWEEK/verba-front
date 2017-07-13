@@ -10,22 +10,44 @@ let Quote = (function(){
     let loadMoreButton = $(document).find('#load-more-quotes');
     let nextQuotesUrl = mainApi + 'quotes';
 
+    let printTags = function(tags) {
+        let tagsHtml = '';
+
+        for (let i = 0; i < tags.length; i++) {
+            let tag = tags[i].name;
+            tagsHtml += `
+                <div class="quote-tag" id="${tag}">
+                  <p>${tag}</p>
+                </div>
+           `;
+        }
+
+        return tagsHtml;
+    };
+
     let print = function(quote) {
+        let tagsHtml = printTags($(quote.tags));
+
         let text = quote.text;
         if (text.length > 90) {
             return `
               <div class="card" data-url="${quote.url}">
                 <h1>"${text.substring(0, 90)}..."</h1>
                 <h2>${quote.author}</h2>
-                <p class="js-quote-url hidden">${quote.url}</p>
+                <div class="quote-tags">
+                    ${tagsHtml}
+                </div>
               </div>
              `;
         }
 
         return `
-              <div class="card">
+              <div class="card" data-url="${quote.url}">
                 <h1>"${text}"</h1>
                 <h2>${quote.author}</h2>
+                 <div class="quote-tags">
+                    ${tagsHtml}
+                </div>
               </div>
                `;
     };
@@ -62,6 +84,7 @@ let Quote = (function(){
                         text: quoteResult.text,
                         author: quoteResult.author.name,
                         url: quoteResult.url,
+                        tags: quoteResult.tags,
                     };
                     quotes.push(quote);
                 }
