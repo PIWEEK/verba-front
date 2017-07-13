@@ -2,13 +2,17 @@
 //////////// API request ///////////
 const mainApi = 'http://verba.piweek.com/api/';
 const authorsApi = mainApi + 'authors/?page_size=200';
+const tagsApi = mainApi + 'tags/?page_size=200';
 let quotes = [];
 let authors = [];
+let tags = [];
 let getButtonQuote = document.querySelector('.js-load-quotes-btn');
 let nextQuoteUrl = mainApi + 'quotes/';
 const quoteContainer = $(document).find('.quotes-container');
 const authorsContainer = $(document).find('.js-authors-container');
+const tagsContainer = $(document).find('.js-tags-container');
 const authorsButton = $(document).find('.js-authors-link');
+const tagsButton = $(document).find('.js-tags-link');
 const filterButton = $(document).find('.js-filter-btn');
 const closeFilterButton = $(document).find('.js-close-btn');
 
@@ -64,7 +68,6 @@ function printQuotes() {
 
 
 function getAuthorsList() {
-
     $.get(authorsApi, function(authorsData, status) {
         if (status === 'success') {
             for (let i = 0; i < authorsData.results.length; i++) {
@@ -80,11 +83,27 @@ function getAuthorsList() {
         }
         return authors;
     });
+}
 
+function getTagsList() {
+    $.get(tagsApi, function(tagsData, status) {
+        if (status === 'success') {
+            for (var i = 0; i < tagsData.results.length; i++) {
+                let tag = {
+                    name: tagsData.results[i].name,
+                };
+                tags.push(tag);
+            }
+            console.log(tags);
+        } else {
+            console.log('Error del servidor, puede que el archivo no exista o que se haya producido un error interno en el servidor');
+        }
+        return tags;
+    });
 }
 
 function printAuthors() {
-    authorsContainer.toggleClass('hidden');     
+    authorsContainer.toggleClass('hidden');
     let htmlAuthor = '';
 
     for (let i = 0; i < authors.length; i++) {
@@ -102,13 +121,26 @@ function loadQuoteDetail() {
     let quoteUrl = $(this).find('.quoteUrl');
 }
 
+function printTags() {
+  tagsContainer.classList.toggle('hidden');
+    tagsContainer.innerHTML = '';
+    for (var i = 0; i < tags.length; i++) {
+        tagsContainer.innerHTML += `
+    <div class="author-btn">
+      ${tags[i].name}
+    </div>
+   `;
+    }
+}
+
 getApiQuotes();
 getAuthorsList();
+getTagsList();
 
 getButtonQuote.click(getApiQuotes);
 authorsButton.click(printAuthors);
+tagsButton.click(printTags);
 
-$(document).click('.card', loadQuoteDetail);
 
 //////////// Modal///////////
 
