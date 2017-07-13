@@ -21,6 +21,8 @@ const filterQuotesButton = $(document).find('.js-apply-filter-btn');
 const closeFilterButton = $(document).find('.js-close-btn');
 
 
+//////////// Quotes ///////////
+
 function getApiQuotes() {
 
     $.get(nextQuoteUrl, function(quotesData, status) {
@@ -43,10 +45,9 @@ function getApiQuotes() {
         return quotes;
     });
 }
-
 function printQuotes() {
-    let htmlQuote = '';
 
+    let htmlQuote = '';
     for (let i = 0; i < quotes.length; i++) {
         let quote = quotes[i].text;
         if (quote.length > 90) {
@@ -70,6 +71,36 @@ function printQuotes() {
     quoteContainer.html(htmlQuote);
 }
 
+getApiQuotes();
+
+function hideQuotesList() {
+    $('#quotes-list').html('');
+}
+
+function showQuoteDetail(quoteData) {
+    let quoteDetail = $('#quote-detail');
+    let author = quoteData.author;
+    quoteDetail.toggleClass('hidden');
+
+    quoteDetail.find('.quote-text').html(quoteData.text);
+    quoteDetail.find('.quote-author').html(author.name);
+    quoteDetail.find('.author-image > img').attr('src', author.image);
+}
+
+$(document).click('.card', function(event){
+    let card = event.target.closest('.card');
+    let quoteUrl = card.getAttribute('data-url');
+
+    $.get(quoteUrl, function(quoteData, status) {
+        hideQuotesList();
+        showQuoteDetail(quoteData);
+    })
+});
+
+
+getButtonQuote.click(getApiQuotes);
+
+//////////// Filters ///////////
 
 function getAuthorsList() {
     $.get(authorsApi, function(authorsData, status) {
@@ -140,14 +171,6 @@ function printAuthors() {
     authorsContainer.html(htmlAuthor);
 }
 
-// function loadQuoteDetail(event) {
-//     let quoteUrl = event.target.url.val();
-//
-//     $.get(quoteUrl, function(quoteData, status) {
-//         var author = quoteData.author;
-//     })
-// }
-
 function printTags() {
     tagsContainer.toggleClass('hidden');
     let htmlTag = '';
@@ -163,34 +186,12 @@ function printTags() {
     tagsContainer.html(htmlTag);
 }
 
-
-getApiQuotes();
-getAuthorsList();
-getTagsList();
-
-getButtonQuote.click(getApiQuotes);
 authorsButton.click(printAuthors);
 tagsButton.click(printTags);
 
-function hideQuotesList() {
-    $('#quotes-container').html('');
-}
+getAuthorsList();
+getTagsList();
 
-function showQuoteDetail(quoteData) {
-    let detailHtml = '';
-
-
-}
-
-$(document).click('.card', function(event){
-    let card = event.target.closest('.card');
-    let quoteUrl = card.getAttribute('data-url');
-
-    $.get(quoteUrl, function(quoteData, status) {
-        hideQuotesList();
-        showQuoteDetail(quoteData);
-    })
-});
 
 //////////// Modal///////////
 
@@ -202,9 +203,3 @@ function modalToggle() {
 filterButton.click(modalToggle);
 filterQuotesButton.click(filterQuotes);
 closeFilterButton.click(modalToggle);
-
-// $(".js-filter-modal").on("show", function () {
-//   $("body").addClass("overflow-hidden");
-// }).on("hidden", function () {
-//   $("body").removeClass("overflow-hidden")
-// });
