@@ -1,11 +1,14 @@
 'use strict';
 //////////// API request ///////////
-const mainApi = 'http://verba.piweek.com:8000/api/';
+const mainApi = 'http://verba.piweek.com/api/';
 const authorsApi = mainApi + 'authors/?page_size=200';
+const quotesApi = mainApi + 'quotes/';
 const tagsApi = mainApi + 'tags/?page_size=200';
+const filterQuotesApi = quotesApi + '?author=31';
 let quotes = [];
 let authors = [];
 let tags = [];
+let filteredQuotes = [];
 let nextQuoteUrl = mainApi + 'quotes/';
 const getButtonQuote = $(document).find('.js-load-quotes-btn');
 const quoteContainer = $(document).find('.quotes-container');
@@ -14,6 +17,7 @@ const tagsContainer = $(document).find('.js-tags-container');
 const authorsButton = $(document).find('.js-authors-link');
 const tagsButton = $(document).find('.js-tags-link');
 const filterButton = $(document).find('.js-filter-btn');
+const filterQuotesButton = $(document).find('.js-apply-filter-btn');
 const closeFilterButton = $(document).find('.js-close-btn');
 
 
@@ -48,7 +52,7 @@ function printQuotes() {
         if (quote.length > 90) {
             htmlQuote += `
               <div class="card">
-                <h1>'${quote.substring(0, 90)}...'</h1>
+                <h1>"${quote.substring(0, 90)}..."</h1>
                 <h2>${quotes[i].author}</h2>
                 <p class="quoteUrl hidden">${quotes[i].url}</p>
               </div>
@@ -56,7 +60,7 @@ function printQuotes() {
         } else {
             htmlQuote += `
               <div class="card">
-                <h1>'${quote}'</h1>
+                <h1>"${quote}"</h1>
                 <h2>${quotes[i].author}</h2>
               </div>
                `;
@@ -99,6 +103,25 @@ function getTagsList() {
             console.log('Error del servidor, puede que el archivo no exista o que se haya producido un error interno en el servidor');
         }
         return tags;
+    });
+}
+
+function filterQuotes() {
+    $.get(filterQuotesApi, function(filterQuotesData, status) {
+        if (status === 'success') {
+            for (var i = 0; i < filterQuotesData.results.length; i++) {
+                let filterQuote = {
+                    text: filterQuotesData.results[i].text,
+                    author: filterQuotesData.results[i].author.name,
+                };
+                filteredQuotes.push(filterQuote);
+                console.log(filterQuote.text);
+                console.log(filterQuote.author);
+            }
+        } else {
+            console.log('Error del servidor, puede que el archivo no exista o que se haya producido un error interno en el servidor');
+        }
+        return filteredQuotes;
     });
 }
 
@@ -161,6 +184,7 @@ function modalToggle() {
 }
 
 filterButton.click(modalToggle);
+filterQuotesButton.click(filterQuotes);
 closeFilterButton.click(modalToggle);
 
 // $(".js-filter-modal").on("show", function () {
