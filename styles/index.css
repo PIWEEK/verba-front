@@ -162,6 +162,18 @@ header {
       flex-wrap: wrap;
   margin-left: 70px; }
 
+.back-btn {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    width: 120px;
+    height: 40px;
+    border: solid 4px #0f00ff;
+    font-family: Inconsolata;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    color: #000000; }
+
 .discover {
   font-family: Inconsolata;
   font-size: 14px;
