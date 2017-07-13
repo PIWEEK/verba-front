@@ -3,7 +3,7 @@
 const requestAuthor = new XMLHttpRequest();
 const requestQuotes = new XMLHttpRequest();
 const requestMoreQuotes = new XMLHttpRequest();
-const mainApi = 'http://localhost:8000/api/';
+const mainApi = 'http://verba.piweek.com/api/';
 const quotesApi = mainApi + 'quotes/';
 const moreQuotesApi = quotesApi + '?page=';
 const authorsApi = mainApi + 'authors/';
