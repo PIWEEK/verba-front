@@ -5,15 +5,12 @@ const authorsApi = mainApi + 'authors/?page_size=200';
 const quotesApi = mainApi + 'quotes/';
 const tagsApi = mainApi + 'tags/?page_size=200';
 const filterQuotesApi = quotesApi + '?author=31';
-let authors = [];
-let tags = [];
-let filteredQuotes = [];
 const authorsContainer = $(document).find('.js-authors-container');
 const tagsContainer = $(document).find('.js-tags-container');
 const authorsButton = $(document).find('.js-authors-link');
 const tagsButton = $(document).find('.js-tags-link');
 const filterButton = $(document).find('.js-filter-btn');
-const filterQuotesButton = $(document).find('.js-apply-filter-btn');
+const applyFilter = $(document).find('.js-apply-filter-btn');
 const closeFilterButton = $(document).find('.js-close-btn');
 
 
@@ -51,6 +48,7 @@ $('.js-back-btn').click(function() {
 
 function getAuthorsList() {
     $.get(authorsApi, function(authorsData, status) {
+        let authors = [];
         if (status === 'success') {
             for (let i = 0; i < authorsData.results.length; i++) {
                 let author = {
@@ -63,12 +61,15 @@ function getAuthorsList() {
         } else {
             console.log('Error del servidor, puede que el archivo no exista o que se haya producido un error interno en el servidor');
         }
-        return authors;
+
+        printAuthors(authors);
     });
 }
 
 function getTagsList() {
     $.get(tagsApi, function(tagsData, status) {
+        let tags = [];
+
         if (status === 'success') {
             for (var i = 0; i < tagsData.results.length; i++) {
                 let tag = {
@@ -80,12 +81,12 @@ function getTagsList() {
         } else {
             console.log('Error del servidor, puede que el archivo no exista o que se haya producido un error interno en el servidor');
         }
-        return tags;
+
+        printTags(tags);
     });
 }
 
-function printAuthors() {
-    authorsContainer.toggleClass('hidden');
+function printAuthors(authors) {
     let htmlAuthor = '';
 
     for (let i = 0; i < authors.length; i++) {
@@ -99,8 +100,7 @@ function printAuthors() {
     authorsContainer.html(htmlAuthor);
 }
 
-function printTags() {
-    tagsContainer.toggleClass('hidden');
+function printTags(tags) {
     let htmlTag = '';
 
     for (let i = 0; i < tags.length; i++) {
@@ -114,22 +114,29 @@ function printTags() {
     tagsContainer.html(htmlTag);
 }
 
-getAuthorsList();
-getTagsList();
 
-authorsButton.click(printAuthors);
-tagsButton.click(printTags);
-
-filterQuotesButton.click(function() {
-    Quote.getFilteredQuotes(filterQuotesApi);
-    modalToggle();
-});
-
-//////////// Modal///////////
 function modalToggle() {
     $(document).find('.js-filter-modal').toggleClass('hidden');
     $(document).find('body').toggleClass('overflow-hidden');
 }
 
-filterButton.click(modalToggle);
+filterButton.click(function() {
+    modalToggle();
+    getAuthorsList();
+    getTagsList();
+});
+
+authorsButton.click(function() {
+    authorsContainer.toggleClass('hidden');
+});
+
+tagsButton.click(function() {
+    tagsContainer.toggleClass('hidden');
+});
+
+applyFilter.click(function() {
+    Quote.getFilteredQuotes(filterQuotesApi);
+    modalToggle();
+});
+
 closeFilterButton.click(modalToggle);
