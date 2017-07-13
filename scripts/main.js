@@ -122,16 +122,20 @@ function loadQuoteDetail() {
 }
 
 function printTags() {
-  tagsContainer.classList.toggle('hidden');
-    tagsContainer.innerHTML = '';
-    for (var i = 0; i < tags.length; i++) {
-        tagsContainer.innerHTML += `
-    <div class="author-btn">
-      ${tags[i].name}
-    </div>
-   `;
+    tagsContainer.toggleClass('hidden');
+    let htmlTag = '';
+
+    for (let i = 0; i < tags.length; i++) {
+        htmlTag += `
+            <div class="author-btn">
+              ${tags[i].name}
+            </div>
+           `;
     }
+
+    tagsContainer.html(htmlTag);
 }
+
 
 getApiQuotes();
 getAuthorsList();
