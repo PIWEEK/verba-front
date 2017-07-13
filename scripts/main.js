@@ -37,7 +37,7 @@ function getApiQuotes() {
                     url: quoteResult.url,
                 };
                 quotes.push(quote);
-                printQuotes();
+                Quote.printQuotes(quotes, quoteContainer);
             }
         } else {
             console.log('Error del servidor, puede que el archivo no exista o que se haya producido un error interno en el servidor');
@@ -45,55 +45,18 @@ function getApiQuotes() {
         return quotes;
     });
 }
-function printQuotes() {
 
-    let htmlQuote = '';
-    for (let i = 0; i < quotes.length; i++) {
-        let quote = quotes[i].text;
-        if (quote.length > 90) {
-            htmlQuote += `
-              <div class="card" data-url="${quotes[i].url}">
-                <h1>"${quote.substring(0, 90)}..."</h1>
-                <h2>${quotes[i].author}</h2>
-                <p class="js-quote-url hidden">${quotes[i].url}</p>
-              </div>
-             `;
-        } else {
-            htmlQuote += `
-              <div class="card">
-                <h1>"${quote}"</h1>
-                <h2>${quotes[i].author}</h2>
-              </div>
-               `;
-        }
-    }
-
-    quoteContainer.html(htmlQuote);
-}
 
 getApiQuotes();
 
-function hideQuotesList() {
-    $('#quotes-list').html('');
-}
-
-function showQuoteDetail(quoteData) {
-    let quoteDetail = $('#quote-detail');
-    let author = quoteData.author;
-    quoteDetail.toggleClass('hidden');
-
-    quoteDetail.find('.quote-text').html(quoteData.text);
-    quoteDetail.find('.quote-author').html(author.name);
-    quoteDetail.find('.author-image > img').attr('src', author.image);
-}
 
 $(document).click('.card', function(event){
     let card = event.target.closest('.card');
     let quoteUrl = card.getAttribute('data-url');
 
     $.get(quoteUrl, function(quoteData, status) {
-        hideQuotesList();
-        showQuoteDetail(quoteData);
+        Quote.hideQuotesList();
+        Quote.showQuoteDetail(quoteData);
     })
 });
 
