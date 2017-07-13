@@ -1,6 +1,6 @@
 'use strict';
 //////////// API request ///////////
-const mainApi = 'http://verba.piweek.com:8000/api/';
+const mainApi = 'http://verba.piweek.com/api/';
 const authorsApi = mainApi + 'authors/?page_size=200';
 let quotes = [];
 let authors = [];
@@ -78,6 +78,7 @@ function getAuthorsList() {
 }
 
 function printAuthors() {
+  authorsContainer.classList.toggle('hidden');
     authorsContainer.innerHTML = '';
     for (var i = 0; i < authors.length; i++) {
         authorsContainer.innerHTML += `
@@ -105,9 +106,3 @@ function modalToggle() {
 
 filterButton.addEventListener('click', modalToggle);
 closeFilterButton.addEventListener('click', modalToggle);
-
-// $(".js-filter-modal").on("show", function () {
-//   $("body").addClass("overflow-hidden");
-// }).on("hidden", function () {
-//   $("body").removeClass("overflow-hidden")
-// });
