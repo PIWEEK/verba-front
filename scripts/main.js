@@ -3,16 +3,20 @@
 const requestAuthor = new XMLHttpRequest();
 const requestQuotes = new XMLHttpRequest();
 const requestMoreQuotes = new XMLHttpRequest();
-const mainApi = 'http://localhost:8000/api/';
+const requestAuthorsList = new XMLHttpRequest();
+const mainApi = 'http://verba.piweek.com/api/';
 const quotesApi = mainApi + 'quotes/';
 const moreQuotesApi = quotesApi + '?page=';
 const authorsApi = mainApi + 'authors/';
 const successRequest = 200;
 const failRequest = 400;
 let quotes = [];
+let authors = [];
 let getButtonQuote = document.querySelector('.js-load-quotes-btn');
 let counterQuote = 1;
 const quoteContainer = document.querySelector('.quotes-container');
+const authorsContainer = document.querySelector('.js-authors-container');
+const authorsButton = document.querySelector('.js-authors-link');
 const filterButton = document.querySelector('.js-filter-btn');
 const closeFilterButton = document.querySelector('.js-close-btn');
 
@@ -93,6 +97,51 @@ function getMoreQuotes() {
 }
 
 getButtonQuote.addEventListener('click', getMoreQuotes);
+
+function getAuthorsList() {
+
+  requestAuthorsList.open('GET', authorsApi, true);
+
+  requestAuthorsList.onload = function() {
+    if (requestAuthorsList.status >= successRequest && requestAuthorsList.status < failRequest) {
+      let authorsData = JSON.parse(requestAuthorsList.responseText);
+      for (var i = 0; i < authorsData.results.length; i++) {
+        let author = {
+          name: authorsData.results[i].name,
+          url: authorsData.results[i].url,
+        };
+        authors.push(author);
+      }
+      console.log(authors);
+    } else {
+      console.log('Error del servidor, puede que el archivo no exista o que se haya producido un error interno en el servidor');
+    }
+    return authors;
+  };
+
+  requestAuthorsList.onerror = function() {
+    console.log('Error al tratar de conectarse con el servidor');
+  };
+
+  requestAuthorsList.send();
+  return authors;
+}
+
+getAuthorsList();
+
+function printAuthors() {
+  authorsContainer.innerHTML = '';
+  for (var i = 0; i < authors.length; i++) {
+    authorsContainer.innerHTML += `
+    <div class="author-btn">
+      ${authors[i].name}
+    </div>
+   `;
+  }
+}
+
+authorsButton.addEventListener('click', printAuthors);
+
 //////////// Modal///////////
 
 function modalToggle() {

@@ -22,3 +22,11 @@ button:focus {
     height: 90px;
     object-fit: contain;
 }
+
+.author-btn {
+    box-shadow: 0 8px 30px 0 rgba(227, 227, 227, 0.38);
+    display: inline-block;
+    font-family: Inconsolata;
+    font-size: 14px;
+    text-align: center;
+}

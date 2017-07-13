@@ -10,12 +10,13 @@ header {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  -webkit-box-align: baseline;
-      -ms-flex-align: baseline;
-          align-items: baseline; }
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+  padding-bottom: 27px; }
 
 .filter-modal {
-  background-color: rgba(0, 0, 255, 0.8);
+  background-color: rgba(0, 0, 0, 0.6);
   position: fixed;
   width: 100vw;
   height: 100vh;
@@ -24,12 +25,37 @@ header {
 
 .filter-modal-content {
   background-color: white;
-  width: 75%;
+  width: 50%;
   margin-left: auto;
-  height: 100vh; }
+  height: 100vh;
+  padding-left: 62px;
+  padding-right: 62px; }
+
+.filters-modal-container {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between; }
+  .filters-modal-container p {
+    font-family: Inconsolata;
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 1.8; }
+
+.modal-tags-container h3 {
+  font-family: Merriweather;
+  font-size: 72px;
+  font-weight: bold;
+  line-height: 0.5;
+  text-align: left;
+  color: #0f00ff;
+  cursor: pointer; }
 
 .nav {
-  margin-right: 72px; }
+  margin-right: 70px; }
   .nav li {
     display: inline-block;
     font-family: 'Merriweather';
@@ -49,14 +75,14 @@ header {
     background-color: white; }
 
 .logo-container {
-  margin-left: 72px;
+  margin-left: 70px;
   width: 200px;
   height: 62px;
   -o-object-fit: contain;
      object-fit: contain; }
 
 .filters-container {
-  padding-right: 72px;
+  padding-right: 70px;
   width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -80,8 +106,7 @@ header {
   display: flex;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
-  margin-left: 72px;
-  margin-right: 72px; }
+  margin-left: 70px; }
 
 .card {
   width: 360px;
@@ -101,6 +126,7 @@ header {
   .card h2 {
     font-family: 'Merriweather';
     font-size: 16px;
+    font-weight: 400;
     text-align: left;
     color: #000000; }
 
@@ -128,7 +154,20 @@ button:focus {
   -o-object-fit: contain;
      object-fit: contain; }
 
+.author-btn {
+  -webkit-box-shadow: 0 8px 30px 0 rgba(227, 227, 227, 0.38);
+          box-shadow: 0 8px 30px 0 rgba(227, 227, 227, 0.38);
+  display: inline-block;
+  font-family: Inconsolata;
+  font-size: 14px;
+  text-align: center; }
+
 .hidden {
   display: none; }
+
+.line {
+  width: 100%;
+  height: 4px;
+  border: solid 4px #0f00ff; }
 
 /*# sourceMappingURL=index.css.map */

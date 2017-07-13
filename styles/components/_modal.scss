@@ -1,5 +1,5 @@
 .filter-modal {
-  background-color: rgba(0,0,255,0.8) ;
+  background-color: rgba(0, 0, 0, 0.6);
   position: fixed;
   width: 100vw;
   height: 100vh;
@@ -9,7 +9,34 @@
 
 .filter-modal-content {
   background-color: white;
-  width: 75%;
+  width: 50%;
   margin-left: auto;
   height: 100vh;
+  padding-left: 62px;
+  padding-right: 62px;
+}
+
+.filters-modal-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+
+  p {
+    font-family: Inconsolata;
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 1.8;
+  }
+}
+
+.modal-tags-container {
+  h3 {
+    font-family: Merriweather;
+    font-size: 72px;
+    font-weight: bold;
+    line-height: 0.5;
+    text-align: left;
+    color: #0f00ff;
+    cursor: pointer;
+  }
 }
