@@ -121,7 +121,7 @@ function buildFilteredQuotesUrl() {
     let selectedAuthorsSize = selectedAuthors.size();
 
     if (selectedAuthorsSize > 0) {
-        urlFilters += 'authors=';
+        urlFilters += 'author=';
 
         for (let i = 0; i < selectedAuthorsSize; i++) {
             urlFilters += $(selectedAuthors[i]).attr('id');
