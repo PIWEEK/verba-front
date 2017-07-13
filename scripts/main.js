@@ -3,7 +3,7 @@
 const requestAuthor = new XMLHttpRequest();
 const requestQuotes = new XMLHttpRequest();
 const requestMoreQuotes = new XMLHttpRequest();
-const mainApi = 'http://verba.piweek.com/api/';
+const mainApi = 'http://localhost:8000/api/';
 const quotesApi = mainApi + 'quotes/';
 const moreQuotesApi = quotesApi + '?page=';
 const authorsApi = mainApi + 'authors/';
@@ -52,9 +52,11 @@ getApiQuotes();
 function printQuotes() {
   quoteContainer.innerHTML = '';
   for (var i = 0; i < quotes.length; i++) {
+    var quote = quotes[i].text;
+    var truncatedQuote = quote.substring(0, 90);
     quoteContainer.innerHTML += `
     <div class="card">
-      <h1>'${quotes[i].text}'</h1>
+      <h1>'${truncatedQuote}...'</h1>
       <h2>${quotes[i].author}</h2>
     </div>
    `;
