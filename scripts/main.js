@@ -5,14 +5,13 @@ const requestQuotes = new XMLHttpRequest();
 const requestMoreQuotes = new XMLHttpRequest();
 const requestAuthorsList = new XMLHttpRequest();
 const mainApi = 'http://localhost:8000/api/';
-const quotesApi = mainApi + 'quotes/';
 const authorsApi = mainApi + 'authors/';
 const successRequest = 200;
 const failRequest = 400;
 let quotes = [];
 let authors = [];
 let getButtonQuote = document.querySelector('.js-load-quotes-btn');
-let nextQuoteUrl = null;
+let nextQuoteUrl = mainApi + 'quotes/';
 const quoteContainer = document.querySelector('.quotes-container');
 const authorsContainer = document.querySelector('.js-authors-container');
 const authorsButton = document.querySelector('.js-authors-link');
@@ -20,10 +19,9 @@ const filterButton = document.querySelector('.js-filter-btn');
 const closeFilterButton = document.querySelector('.js-close-btn');
 
 
-
 function getApiQuotes() {
 
-  requestQuotes.open('GET', quotesApi, true);
+  requestQuotes.open('GET', nextQuoteUrl, true);
 
   requestQuotes.onload = function() {
     if (requestQuotes.status >= successRequest && requestQuotes.status < failRequest) {
@@ -76,37 +74,8 @@ function printQuotes() {
   }
 }
 
-function getMoreQuotes() {
-  requestMoreQuotes.open('GET', nextQuoteUrl, true);
 
-  requestMoreQuotes.onload = function() {
-    if (requestMoreQuotes.status >= successRequest && requestMoreQuotes.status < failRequest) {
-      let moreQuotesData = JSON.parse(requestMoreQuotes.responseText);
-      nextQuoteUrl = moreQuotesData.next;
-
-      for (var i = 0; i < moreQuotesData.results.length; i++) {
-        let quote = {
-          text: moreQuotesData.results[i].text,
-          author: moreQuotesData.results[i].author.name,
-        };
-        quotes.push(quote);
-        printQuotes();
-      }
-    } else {
-      console.log('Error del servidor, puede que el archivo no exista o que se haya producido un error interno en el servidor');
-    }
-    return quotes;
-  };
-
-  requestMoreQuotes.onerror = function() {
-    console.log('Error al tratar de conectarse con el servidor');
-  };
-
-  requestMoreQuotes.send();
-  return quotes;
-}
-
-getButtonQuote.addEventListener('click', getMoreQuotes);
+getButtonQuote.addEventListener('click', getApiQuotes);
 
 function getAuthorsList() {
 
