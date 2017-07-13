@@ -1,10 +1,14 @@
+'use strict';
+
+const mainApi = 'http://verba-mujer.es/api/';
+
 let Quote = (function(){
 
     let quote = {};
 
     let quoteContainer = $(document).find('.quotes-container');
 
-    quote.nextQuotesUrl = 'http://verba-mujer.es/api/quotes';
+    quote.nextQuotesUrl = mainApi + 'quotes';
 
     let print = function(quote) {
         let text = quote.text;

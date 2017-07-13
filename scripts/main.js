@@ -1,6 +1,5 @@
 'use strict';
 //////////// API request ///////////
-const mainApi = 'http://verba-mujer.es/api/';
 const authorsApi = mainApi + 'authors/?page_size=200';
 const quotesApi = mainApi + 'quotes/';
 const tagsApi = mainApi + 'tags/?page_size=200';
