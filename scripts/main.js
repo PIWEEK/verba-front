@@ -1,13 +1,13 @@
 'use strict';
 //////////// API request ///////////
-const mainApi = 'http://verba.piweek.com/api/';
+const mainApi = 'http://verba.piweek.com:8000/api/';
 const authorsApi = mainApi + 'authors/?page_size=200';
 const tagsApi = mainApi + 'tags/?page_size=200';
 let quotes = [];
 let authors = [];
 let tags = [];
-let getButtonQuote = document.querySelector('.js-load-quotes-btn');
 let nextQuoteUrl = mainApi + 'quotes/';
+const getButtonQuote = $(document).find('.js-load-quotes-btn');
 const quoteContainer = $(document).find('.quotes-container');
 const authorsContainer = $(document).find('.js-authors-container');
 const tagsContainer = $(document).find('.js-tags-container');
@@ -118,7 +118,11 @@ function printAuthors() {
 }
 
 function loadQuoteDetail() {
-    let quoteUrl = $(this).find('.quoteUrl');
+    let quoteUrl = $(this).find('.quoteUrl').val();
+
+    $.get(quoteUrl, function(quoteData, status) {
+
+    })
 }
 
 function printTags() {
@@ -145,6 +149,7 @@ getButtonQuote.click(getApiQuotes);
 authorsButton.click(printAuthors);
 tagsButton.click(printTags);
 
+$(document).click('.card', loadQuoteDetail);
 
 //////////// Modal///////////
 
