@@ -75,13 +75,18 @@ let Quote = (function(){
         Quote.getQuotes();
     };
 
-    quote.toggleDetailAndList = function() {
-        $('#quotes-list').toggleClass('hidden');
-        $('#quote-detail').toggleClass('hidden');
+    quote.showDetail = function() {
+        $('#quotes-list').hide();
+        $('#quote-detail').show();
+    };
+
+    quote.hideDetail = function() {
+        $('#quotes-list').show();
+        $('#quote-detail').hide();
     };
 
     quote.printQuoteDetail = function(quoteData) {
-        Quote.toggleDetailAndList();
+        Quote.showDetail();
 
         let quoteDetail = $('#quote-detail');
         let author = quoteData.author;
@@ -90,6 +95,7 @@ let Quote = (function(){
         quoteDetail.find('.quote-author').html(author.name);
         quoteDetail.find('.author-detail-image > img').attr('src', author.image);
         let quotes = [];
+
 
         for (let i = 0; i < quoteData.related_quotes.length; i++) {
             let relatedQuote = quoteData.related_quotes[i];
@@ -102,6 +108,7 @@ let Quote = (function(){
         }
 
         let quoteDetailContainer = quoteDetail.find('.related-quotes');
+        quoteDetailContainer.html('');
         printQuotes(quotes, quoteDetailContainer);
     };
 

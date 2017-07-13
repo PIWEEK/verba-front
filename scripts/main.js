@@ -34,7 +34,7 @@ $('.js-load-quotes-btn').click(function() {
 });
 
 $('.js-back-btn').click(function() {
-    Quote.toggleDetailAndList();
+    Quote.hideDetail();
 });
 
 //////////// Filters ///////////
