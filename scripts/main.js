@@ -5,11 +5,9 @@ const authorsApi = mainApi + 'authors/?page_size=200';
 const quotesApi = mainApi + 'quotes/';
 const tagsApi = mainApi + 'tags/?page_size=200';
 const filterQuotesApi = quotesApi + '?author=31';
-let quotes = [];
 let authors = [];
 let tags = [];
 let filteredQuotes = [];
-let nextQuoteUrl = mainApi + 'quotes/';
 const getButtonQuote = $(document).find('.js-load-quotes-btn');
 const quoteContainer = $(document).find('.quotes-container');
 const authorsContainer = $(document).find('.js-authors-container');
@@ -23,31 +21,9 @@ const closeFilterButton = $(document).find('.js-close-btn');
 
 //////////// Quotes ///////////
 
-function getApiQuotes() {
-
-    $.get(nextQuoteUrl, function(quotesData, status) {
-        if (status === 'success') {
-            nextQuoteUrl = quotesData.next;
-
-            for (let i = 0; i < quotesData.results.length; i++) {
-                let quoteResult = quotesData.results[i];
-                let quote = {
-                    text: quoteResult.text,
-                    author: quoteResult.author.name,
-                    url: quoteResult.url,
-                };
-                quotes.push(quote);
-                Quote.printQuotes(quotes, quoteContainer);
-            }
-        } else {
-            console.log('Error del servidor, puede que el archivo no exista o que se haya producido un error interno en el servidor');
-        }
-        return quotes;
-    });
-}
-
-
-getApiQuotes();
+$(function() {
+    Quote.getQuotes();
+});
 
 
 $(document).on('click', '.card', function(event){
@@ -55,8 +31,7 @@ $(document).on('click', '.card', function(event){
     let quoteUrl = card.getAttribute('data-url');
 
     $.get(quoteUrl, function(quoteData, status) {
-        Quote.hideQuotesList();
-        Quote.showQuoteDetail(quoteData);
+        Quote.printQuoteDetail(quoteData);
     })
 });
 
@@ -66,7 +41,11 @@ $(document).on('click', '.author-btn', function(event){
 });
 
 
-getButtonQuote.click(getApiQuotes);
+getButtonQuote.click(Quote.getQuotes());
+
+$('.js-back-btn').click(function() {
+    Quote.toggleDetailAndList();
+});
 
 //////////// Filters ///////////
 

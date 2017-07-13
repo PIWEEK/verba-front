@@ -1,106 +1,95 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <meta charset="utf-8">
     <title> Verba</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css?family=Inconsolata:400,700|Merriweather:400,700" rel="stylesheet">
     <link rel="stylesheet" href="styles/index.css">
 
-  </head>
-  <body>
-    <header>
-      <div class="logo-container">
+</head>
+<body>
+<header>
+    <div class="logo-container">
         <img src="images/logo-verba.svg" class="logo-verba">
-      </div>
-      <div class="nav-container">
+    </div>
+    <div class="nav-container">
         <ul class="nav">
-          <li>manifiesto</li>
+            <li>manifiesto</li>
         </ul>
-      </div>
-    </header>
+    </div>
+</header>
 
-    <main>
-      <div class="filters-container">
+<main>
+    <div class="filters-container">
         <button type="button" name="button" class="js-filter-btn filter-btn">Filtrar</button>
-      </div>
+    </div>
 
-        <div id="quotes-list" class="quotes-list">
-            <div id="quotes-container" class="quotes-container">
-            </div>
+    <div id="quotes-list" class="quotes-list">
+        <div id="quotes-container" class="quotes-container">
+        </div>
 
-          <div class="load-more-container">
+        <div class="load-more-container">
             <button class="js-load-quotes-btn" type="button" name="button"><img src="images/buttom-more.svg"
-           class="buttom_more"></button>
-          </div>
-      </div>
+                                                                                class="buttom_more"></button>
+        </div>
+    </div>
 
-      <div id="quote-detail" class="quote-detail hidden">
+    <div id="quote-detail" class="quote-detail hidden">
+        <button type="button" name="back_button" class="js-back-btn filter-btn">Volver</button>
         <div id="quote-detail-container" class="quote-container">
-          <div class="quote">
-            <div class="quote-text">
+            <div class="quote">
+                <div class="quote-text">
+                </div>
+                <div class="quote-author">
+                </div>
             </div>
-            <div class="quote-author">
+            <div class="author-image">
+                <img src=""/>
             </div>
-          </div>
-          <div class="author-image">
-            <img src="" />
-          </div>
         </div>
         <div class="related">
-          <div class="discover">
-            <p>Descubre otras citas...</p>
-          </div>
-          <div class="related-quotes">
-            <div class="card">
-              <h1>'Quiero un chico malo en el público, ¡y un gatito en casa!'</h1>
-              <h2>Christina Aguilera</h2>
+            <div class="discover">
+                <p>Descubre otras citas...</p>
             </div>
-            <div class="card">
-              <h1>'Quiero un chico malo en el público, ¡y un gatito en casa!'</h1>
-              <h2>Christina Aguilera</h2>
+            <div class="related-quotes">
             </div>
-            <div class="card">
-              <h1>'Quiero un chico malo en el público, ¡y un gatito en casa!'</h1>
-              <h2>Christina Aguilera</h2>
-            </div>
-          </div>
         </div>
-      </div>
+    </div>
 
-      <div class="filter-modal js-filter-modal hidden">
+    <div class="filter-modal js-filter-modal hidden">
         <div class="filter-modal-content">
-          <div class="filters-modal-container">
-            <p>Filtrar</p>
-            <button type="button" name="button" class="js-close-btn">X</button>
-          </div>
-
-          <div class="modal-tags-container">
-            <div class="line"></div>
-
-            <h3 class="js-authors-link">Autoras</h3>
-
-            <div class="js-authors-container hidden">
-
+            <div class="filters-modal-container">
+                <p>Filtrar</p>
+                <button type="button" name="button" class="js-close-btn">X</button>
             </div>
-          </div>
 
-          <div class="modal-tags-container">
-            <div class="line"></div>
+            <div class="modal-tags-container">
+                <div class="line"></div>
 
-            <h3 class="js-tags-link">Temas</h3>
+                <h3 class="js-authors-link">Autoras</h3>
 
-            <div class="js-tags-container hidden">
+                <div class="js-authors-container hidden">
 
+                </div>
             </div>
-          </div>
-          <button type="button" name="button" class="js-apply-filter-btn filter-btn">Filtrar</button>
+
+            <div class="modal-tags-container">
+                <div class="line"></div>
+
+                <h3 class="js-tags-link">Temas</h3>
+
+                <div class="js-tags-container hidden">
+
+                </div>
+            </div>
+            <button type="button" name="button" class="js-apply-filter-btn filter-btn">Filtrar</button>
         </div>
-      </div>
-    </main>
+    </div>
+</main>
 
 <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
 <script src="scripts/quotes.js" charset="utf-8"></script>
 <script src="scripts/main.js" charset="utf-8"></script>
-  </body>
+</body>
 </html>

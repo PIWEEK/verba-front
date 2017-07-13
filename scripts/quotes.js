@@ -1,8 +1,9 @@
 let Quote = (function(){
 
     let quote = {};
+    quote.nextQuoteUrl = 'http://verba.piweek.com/api/quotes';
 
-    quote.print = function(quote) {
+    let print = function(quote) {
         let text = quote.text;
         if (text.length > 90) {
             return `
@@ -22,29 +23,72 @@ let Quote = (function(){
                `;
     };
 
-    quote.printQuotes = function(quotes, htmlContainer) {
+    let printQuotes = function(quotes, htmlContainer) {
         let htmlQuote = '';
         for (let i = 0; i < quotes.length; i++) {
             let quote = quotes[i];
-            htmlQuote += Quote.print(quote);
+            htmlQuote += print(quote);
         }
 
-        htmlContainer.html(htmlQuote);
+        htmlContainer.append(htmlQuote);
     };
 
-    quote.hideQuotesList = function() {
-        $('#quotes-list').html('');
+
+    quote.getQuotes = function() {
+
+        $.get(quote.nextQuoteUrl, function(quotesData, status) {
+            let quotes = [];
+
+            if (status === 'success') {
+                quote.nextQuoteUrl = quotesData.next;
+
+                for (let i = 0; i < quotesData.results.length; i++) {
+                    let quoteResult = quotesData.results[i];
+                    let quote = {
+                        text: quoteResult.text,
+                        author: quoteResult.author.name,
+                        url: quoteResult.url,
+                    };
+                    quotes.push(quote);
+                }
+
+                printQuotes(quotes, quoteContainer);
+            } else {
+                console.log('Error del servidor, puede que el archivo no exista o que se haya producido un error interno en el servidor');
+            }
+
+        });
+
     };
 
-    quote.showQuoteDetail = function(quoteData) {
+    quote.toggleDetailAndList = function() {
+        $('#quotes-list').toggleClass('hidden');
+        $('#quote-detail').toggleClass('hidden');
+    };
+
+    quote.printQuoteDetail = function(quoteData) {
+        Quote.toggleDetailAndList();
+
         let quoteDetail = $('#quote-detail');
         let author = quoteData.author;
-        quoteDetail.toggleClass('hidden');
 
         quoteDetail.find('.quote-text').html(quoteData.text);
         quoteDetail.find('.quote-author').html(author.name);
         quoteDetail.find('.author-image > img').attr('src', author.image);
-        // quoteDetail.find('.related-quotes').html(Quote.printQuotes(quoteDetail.))
+        let quotes = [];
+
+        for (let i = 0; i < quoteData.related_quotes.length; i++) {
+            let relatedQuote = quoteData.related_quotes[i];
+            let quote = {
+                text: relatedQuote.text,
+                author: relatedQuote.author_name,
+                url: relatedQuote.url,
+            };
+            quotes.push(quote);
+        }
+
+        let quoteDetailContainer = quoteDetail.find('.related-quotes');
+        printQuotes(quotes, quoteDetailContainer);
     };
 
     return quote;
