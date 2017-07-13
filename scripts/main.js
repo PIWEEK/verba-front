@@ -4,7 +4,6 @@ const mainApi = 'http://verba.piweek.com/api/';
 const authorsApi = mainApi + 'authors/?page_size=200';
 const quotesApi = mainApi + 'quotes/';
 const tagsApi = mainApi + 'tags/?page_size=200';
-const filterQuotesApi = quotesApi + '?author=31';
 const authorsContainer = $(document).find('.js-authors-container');
 const tagsContainer = $(document).find('.js-tags-container');
 const authorsButton = $(document).find('.js-authors-link');
@@ -30,11 +29,6 @@ $(document).on('click', '.card', function(event){
     })
 });
 
-$(document).on('click', '.author-btn', function(event){
-    let author_btn = $(event.target);
-    author_btn.toggleClass("selected");
-});
-
 
 $('.js-load-quotes-btn').click(function() {
     Quote.getQuotes()
@@ -46,12 +40,18 @@ $('.js-back-btn').click(function() {
 
 //////////// Filters ///////////
 
+$(document).on('click', '.author-btn', function(event){
+    let author_btn = $(event.target);
+    author_btn.toggleClass("selected");
+});
+
 function getAuthorsList() {
     $.get(authorsApi, function(authorsData, status) {
         let authors = [];
         if (status === 'success') {
             for (let i = 0; i < authorsData.results.length; i++) {
                 let author = {
+                    id: authorsData.results[i].id,
                     name: authorsData.results[i].name,
                     url: authorsData.results[i].url,
                 };
@@ -91,8 +91,8 @@ function printAuthors(authors) {
 
     for (let i = 0; i < authors.length; i++) {
         htmlAuthor += `
-            <div class="author-btn">
-              ${authors[i].name}
+            <div class="author-btn js-author" id="${authors[i].id}">
+              <p>${authors[i].name}</p>
             </div>
            `;
     }
@@ -105,8 +105,8 @@ function printTags(tags) {
 
     for (let i = 0; i < tags.length; i++) {
         htmlTag += `
-            <div class="author-btn">
-              ${tags[i].name}
+            <div class="author-btn js-tag" id="${tags[i].name}">
+              <p>${tags[i].name}</p>
             </div>
            `;
     }
@@ -114,6 +114,44 @@ function printTags(tags) {
     tagsContainer.html(htmlTag);
 }
 
+
+function buildFilteredQuotesUrl() {
+    let urlFilters = quotesApi + '?';
+
+    let selectedAuthors = $('.js-author.selected');
+    let selectedAuthorsSize = selectedAuthors.size();
+
+    if (selectedAuthorsSize > 0) {
+        urlFilters += 'authors=';
+
+        for (let i = 0; i < selectedAuthorsSize; i++) {
+            urlFilters += $(selectedAuthors[i]).attr('id');
+
+            if (i < selectedAuthorsSize - 1) {
+                urlFilters += ',';
+            } else {
+                urlFilters +='&';
+            }
+        }
+    }
+
+    let selectedTags = $('.js-tag.selected');
+    let selectedTagsSize = selectedTags.size();
+
+    if (selectedTagsSize > 0) {
+        urlFilters += 'tags=';
+
+        for (let i = 0; i < selectedTagsSize; i++) {
+            urlFilters += $(selectedTags[i]).attr('id');
+
+            if (i < selectedTagsSize - 1) {
+                urlFilters += ',';
+            }
+        }
+    }
+
+    return urlFilters;
+}
 
 function modalToggle() {
     $(document).find('.js-filter-modal').toggleClass('hidden');
@@ -135,7 +173,8 @@ tagsButton.click(function() {
 });
 
 applyFilter.click(function() {
-    Quote.getFilteredQuotes(filterQuotesApi);
+    let filterQuotesUrl = buildFilteredQuotesUrl();
+    Quote.getFilteredQuotes(filterQuotesUrl);
     modalToggle();
 });
 
