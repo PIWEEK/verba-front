@@ -46,7 +46,7 @@ header {
     font-weight: bold;
     line-height: 1.8; }
 
-.modal-tags-container h3 {
+.modal-filter-list h3 {
   font-family: Merriweather;
   font-size: 72px;
   font-weight: bold;
@@ -182,7 +182,7 @@ button:focus {
   -o-object-fit: contain;
      object-fit: contain; }
 
-.author-btn {
+.filter-option-btn {
   -webkit-box-shadow: 0 8px 30px 0 rgba(227, 227, 227, 0.38);
           box-shadow: 0 8px 30px 0 rgba(227, 227, 227, 0.38);
   display: inline-block;
@@ -193,6 +193,20 @@ button:focus {
   padding-right: 32px;
   padding-top: 12px;
   padding-bottom: 12px; }
+
+.filter-option-btn.selected {
+     -webkit-box-shadow: 0 8px 30px 0 rgba(64, 62, 246, 0.31);
+             box-shadow: 0 8px 30px 0 rgba(64, 62, 246, 0.31);
+     background-color: #3d3bee;
+     display: inline-block;
+     font-family: Inconsolata;
+     font-size: 14px;
+     text-align: center;
+     padding-left: 32px;
+     padding-right: 32px;
+     padding-top: 12px;
+     padding-bottom: 12px; }
+
 
 .hidden {
   display: none; }

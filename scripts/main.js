@@ -39,7 +39,7 @@ $('.js-back-btn').click(function() {
 
 //////////// Filters ///////////
 
-$(document).on('click', '.author-btn', function(event){
+$(document).on('click', '.filter-option-btn', function(event){
     let author_btn = $(event.target);
     author_btn.toggleClass("selected");
 });
@@ -56,7 +56,6 @@ function getAuthorsList() {
                 };
                 authors.push(author);
             }
-            console.log(authors);
         } else {
             console.log('Error del servidor, puede que el archivo no exista o que se haya producido un error interno en el servidor');
         }
@@ -76,7 +75,6 @@ function getTagsList() {
                 };
                 tags.push(tag);
             }
-            console.log(tags);
         } else {
             console.log('Error del servidor, puede que el archivo no exista o que se haya producido un error interno en el servidor');
         }
@@ -90,7 +88,7 @@ function printAuthors(authors) {
 
     for (let i = 0; i < authors.length; i++) {
         htmlAuthor += `
-            <div class="author-btn js-author" id="${authors[i].id}">
+            <div class="filter-option-btn js-author" id="${authors[i].id}">
               <p>${authors[i].name}</p>
             </div>
            `;
@@ -104,7 +102,7 @@ function printTags(tags) {
 
     for (let i = 0; i < tags.length; i++) {
         htmlTag += `
-            <div class="author-btn js-tag" id="${tags[i].name}">
+            <div class="filter-option-btn js-tag" id="${tags[i].name}">
               <p>${tags[i].name}</p>
             </div>
            `;

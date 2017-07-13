@@ -6,9 +6,9 @@ let Quote = (function(){
 
     let quote = {};
 
-    let quoteContainer = $(document).find('.quotes-container');
-
-    quote.nextQuotesUrl = mainApi + 'quotes';
+    let quoteContainer = $(document).find('#quotes-container');
+    let loadMoreButton = $(document).find('#load-more-quotes');
+    let nextQuotesUrl = mainApi + 'quotes';
 
     let print = function(quote) {
         let text = quote.text;
@@ -40,14 +40,21 @@ let Quote = (function(){
         htmlContainer.append(htmlQuote);
     };
 
+    let printLoadMoreButton = function() {
+      if (nextQuotesUrl === null) {
+          loadMoreButton.hide();
+      }  else {
+          loadMoreButton.show();
+      }
+    };
 
     quote.getQuotes = function() {
 
-        $.get(quote.nextQuotesUrl, function(quotesData, status) {
+        $.get(nextQuotesUrl, function(quotesData, status) {
             let quotes = [];
 
             if (status === 'success') {
-                quote.nextQuotesUrl = quotesData.next;
+                nextQuotesUrl = quotesData.next;
 
                 for (let i = 0; i < quotesData.results.length; i++) {
                     let quoteResult = quotesData.results[i];
@@ -60,6 +67,7 @@ let Quote = (function(){
                 }
 
                 printQuotes(quotes, quoteContainer);
+                printLoadMoreButton();
             } else {
                 console.log('Error del servidor, puede que el archivo no exista o que se haya producido un error interno en el servidor');
             }
@@ -69,7 +77,7 @@ let Quote = (function(){
     };
 
     quote.getFilteredQuotes = function(filterUrl) {
-        quote.nextQuotesUrl = filterUrl;
+        nextQuotesUrl = filterUrl;
         quoteContainer.html('');
 
         Quote.getQuotes();
@@ -77,11 +85,15 @@ let Quote = (function(){
 
     quote.showDetail = function() {
         $('#quotes-list').hide();
+        loadMoreButton.hide();
+
         $('#quote-detail').show();
     };
 
     quote.hideDetail = function() {
         $('#quotes-list').show();
+        printLoadMoreButton();
+
         $('#quote-detail').hide();
     };
 
