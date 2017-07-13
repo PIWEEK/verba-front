@@ -127,7 +127,15 @@ authorsButton.addEventListener('click', printAuthors);
 function modalToggle() {
   const filterModal = document.querySelector('.js-filter-modal');
   filterModal.classList.toggle('hidden');
+  const body = document.querySelector('body');
+  body.classList.toggle('overflow-hidden');
 }
 
 filterButton.addEventListener('click', modalToggle);
 closeFilterButton.addEventListener('click', modalToggle);
+
+// $(".js-filter-modal").on("show", function () {
+//   $("body").addClass("overflow-hidden");
+// }).on("hidden", function () {
+//   $("body").removeClass("overflow-hidden")
+// });

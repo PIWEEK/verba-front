@@ -29,7 +29,8 @@ header {
   margin-left: auto;
   height: 100vh;
   padding-left: 62px;
-  padding-right: 62px; }
+  padding-right: 62px;
+  overflow: scroll; }
 
 .filters-modal-container {
   width: 100%;
@@ -174,7 +175,7 @@ button:focus {
   height: 4px;
   border: solid 4px #0f00ff; }
 
-.overflow-hidden {
+body.overflow-hidden {
   overflow: hidden; }
 
 /*# sourceMappingURL=index.css.map */
