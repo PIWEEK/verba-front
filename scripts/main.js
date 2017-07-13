@@ -51,10 +51,10 @@ function printQuotes() {
         let quote = quotes[i].text;
         if (quote.length > 90) {
             htmlQuote += `
-              <div class="card">
+              <div class="card" data-url="${quotes[i].url}">
                 <h1>"${quote.substring(0, 90)}..."</h1>
                 <h2>${quotes[i].author}</h2>
-                <p class="quoteUrl hidden">${quotes[i].url}</p>
+                <p class="js-quote-url hidden">${quotes[i].url}</p>
               </div>
              `;
         } else {
@@ -140,13 +140,13 @@ function printAuthors() {
     authorsContainer.html(htmlAuthor);
 }
 
-function loadQuoteDetail() {
-    let quoteUrl = $(this).find('.quoteUrl').val();
-
-    $.get(quoteUrl, function(quoteData, status) {
-
-    })
-}
+// function loadQuoteDetail(event) {
+//     let quoteUrl = event.target.url.val();
+//
+//     $.get(quoteUrl, function(quoteData, status) {
+//         var author = quoteData.author;
+//     })
+// }
 
 function printTags() {
     tagsContainer.toggleClass('hidden');
@@ -172,15 +172,31 @@ getButtonQuote.click(getApiQuotes);
 authorsButton.click(printAuthors);
 tagsButton.click(printTags);
 
-$(document).click('.card', loadQuoteDetail);
+function hideQuotesList() {
+    $('#quotes-container').html('');
+}
+
+function showQuoteDetail(quoteData) {
+    let detailHtml = '';
+
+
+}
+
+$(document).click('.card', function(event){
+    let card = event.target.closest('.card');
+    let quoteUrl = card.getAttribute('data-url');
+
+    $.get(quoteUrl, function(quoteData, status) {
+        hideQuotesList();
+        showQuoteDetail(quoteData);
+    })
+});
 
 //////////// Modal///////////
 
 function modalToggle() {
-    const filterModal = document.querySelector('.js-filter-modal');
-    filterModal.classList.toggle('hidden');
-    const body = document.querySelector('body');
-    body.classList.toggle('overflow-hidden');
+    $(document).find('.js-filter-modal').toggleClass('hidden');
+    $(document).find('body').toggleClass('overflow-hidden');
 }
 
 filterButton.click(modalToggle);
