@@ -50,7 +50,7 @@ function getApiQuotes() {
 getApiQuotes();
 
 
-$(document).click('.card', function(event){
+$(document).on('click', '.card', function(event){
     let card = event.target.closest('.card');
     let quoteUrl = card.getAttribute('data-url');
 
@@ -58,6 +58,11 @@ $(document).click('.card', function(event){
         Quote.hideQuotesList();
         Quote.showQuoteDetail(quoteData);
     })
+});
+
+$(document).on('click', '.author-btn', function(event){
+    let author_btn = $(event.target);
+    author_btn.toggleClass("selected");
 });
 
 
