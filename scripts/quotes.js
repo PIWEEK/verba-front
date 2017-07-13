@@ -88,7 +88,7 @@ let Quote = (function(){
 
         quoteDetail.find('.quote-text').html(quoteData.text);
         quoteDetail.find('.quote-author').html(author.name);
-        quoteDetail.find('.author-image > img').attr('src', author.image);
+        quoteDetail.find('.author-detail-image > img').attr('src', author.image);
         let quotes = [];
 
         for (let i = 0; i < quoteData.related_quotes.length; i++) {
