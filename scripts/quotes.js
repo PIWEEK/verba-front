@@ -4,7 +4,7 @@ let Quote = (function(){
 
     let quoteContainer = $(document).find('.quotes-container');
 
-    quote.nextQuotesUrl = 'http://verba.piweek.com/api/quotes';
+    quote.nextQuotesUrl = 'http://verba-mujer.es/api/quotes';
 
     let print = function(quote) {
         let text = quote.text;
