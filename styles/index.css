@@ -3,12 +3,16 @@
           box-sizing: border-box; }
 
 header {
+  height: 130px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
-          justify-content: space-between; }
+          justify-content: space-between;
+  -webkit-box-align: baseline;
+      -ms-flex-align: baseline;
+          align-items: baseline; }
 
 .filter-modal {
   background-color: rgba(0, 0, 255, 0.8);
@@ -33,7 +37,8 @@ header {
     font-weight: bold;
     line-height: 1.8;
     text-align: center;
-    color: #000000; }
+    color: #000000;
+    padding-left: 16px; }
   .nav button {
     border: solid 4px #0f00ff;
     font-family: 'Inconsolata';
@@ -49,6 +54,25 @@ header {
   height: 62px;
   -o-object-fit: contain;
      object-fit: contain; }
+
+.filters-container {
+  padding-right: 72px;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end; }
+
+.load-more-container {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center; }
 
 .quotes-container {
   display: -webkit-box;
@@ -79,6 +103,30 @@ header {
     font-size: 16px;
     text-align: left;
     color: #000000; }
+
+button,
+button:focus {
+  border: none;
+  background-image: none;
+  background-color: transparent;
+  -webkit-box-shadow: none;
+          box-shadow: none; }
+
+.filter-btn {
+  width: 120px;
+  height: 40px;
+  border: solid 4px #0f00ff;
+  font-family: Inconsolata;
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+  color: #000000; }
+
+.buttom_more {
+  width: 90px;
+  height: 90px;
+  -o-object-fit: contain;
+     object-fit: contain; }
 
 .hidden {
   display: none; }
