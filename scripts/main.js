@@ -6,14 +6,13 @@ const requestMoreQuotes = new XMLHttpRequest();
 const requestAuthorsList = new XMLHttpRequest();
 const mainApi = 'http://localhost:8000/api/';
 const quotesApi = mainApi + 'quotes/';
-const moreQuotesApi = quotesApi + '?page=';
 const authorsApi = mainApi + 'authors/';
 const successRequest = 200;
 const failRequest = 400;
 let quotes = [];
 let authors = [];
 let getButtonQuote = document.querySelector('.js-load-quotes-btn');
-let counterQuote = 1;
+let nextQuoteUrl = null;
 const quoteContainer = document.querySelector('.quotes-container');
 const authorsContainer = document.querySelector('.js-authors-container');
 const authorsButton = document.querySelector('.js-authors-link');
@@ -29,6 +28,8 @@ function getApiQuotes() {
   requestQuotes.onload = function() {
     if (requestQuotes.status >= successRequest && requestQuotes.status < failRequest) {
       let quotesData = JSON.parse(requestQuotes.responseText);
+      nextQuoteUrl = quotesData.next;
+
       for (var i = 0; i < quotesData.results.length; i++) {
         let quote = {
           text: quotesData.results[i].text,
@@ -76,12 +77,13 @@ function printQuotes() {
 }
 
 function getMoreQuotes() {
-  requestMoreQuotes.open('GET', moreQuotesApi + counterQuote, true);
+  requestMoreQuotes.open('GET', nextQuoteUrl, true);
 
   requestMoreQuotes.onload = function() {
-    counterQuote = counterQuote + 1;
     if (requestMoreQuotes.status >= successRequest && requestMoreQuotes.status < failRequest) {
       let moreQuotesData = JSON.parse(requestMoreQuotes.responseText);
+      nextQuoteUrl = moreQuotesData.next;
+
       for (var i = 0; i < moreQuotesData.results.length; i++) {
         let quote = {
           text: moreQuotesData.results[i].text,
