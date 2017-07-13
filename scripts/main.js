@@ -6,11 +6,11 @@ let quotes = [];
 let authors = [];
 let getButtonQuote = document.querySelector('.js-load-quotes-btn');
 let nextQuoteUrl = mainApi + 'quotes/';
-const quoteContainer = document.querySelector('.quotes-container');
-const authorsContainer = document.querySelector('.js-authors-container');
-const authorsButton = document.querySelector('.js-authors-link');
-const filterButton = document.querySelector('.js-filter-btn');
-const closeFilterButton = document.querySelector('.js-close-btn');
+const quoteContainer = $(document).find('.quotes-container');
+const authorsContainer = $(document).find('.js-authors-container');
+const authorsButton = $(document).find('.js-authors-link');
+const filterButton = $(document).find('.js-filter-btn');
+const closeFilterButton = $(document).find('.js-close-btn');
 
 
 function getApiQuotes() {
@@ -19,10 +19,12 @@ function getApiQuotes() {
         if (status === 'success') {
             nextQuoteUrl = quotesData.next;
 
-            for (var i = 0; i < quotesData.results.length; i++) {
+            for (let i = 0; i < quotesData.results.length; i++) {
+                let quoteResult = quotesData.results[i];
                 let quote = {
-                    text: quotesData.results[i].text,
-                    author: quotesData.results[i].author.name,
+                    text: quoteResult.text,
+                    author: quoteResult.author.name,
+                    url: quoteResult.url,
                 };
                 quotes.push(quote);
                 printQuotes();
@@ -35,25 +37,29 @@ function getApiQuotes() {
 }
 
 function printQuotes() {
-  quoteContainer.innerHTML = '';
-  for (var i = 0; i < quotes.length; i++) {
-    var quote = quotes[i].text;
-    if (quote.length > 90) {
-      quoteContainer.innerHTML += `
-      <div class="card">
-        <h1>'${quote.substring(0, 90)}...'</h1>
-        <h2>${quotes[i].author}</h2>
-      </div>
-     `;
-    } else {
-      quoteContainer.innerHTML += `
-      <div class="card">
-        <h1>'${quote}'</h1>
-        <h2>${quotes[i].author}</h2>
-      </div>
-     `;
+    let htmlQuote = '';
+
+    for (let i = 0; i < quotes.length; i++) {
+        let quote = quotes[i].text;
+        if (quote.length > 90) {
+            htmlQuote += `
+              <div class="card">
+                <h1>'${quote.substring(0, 90)}...'</h1>
+                <h2>${quotes[i].author}</h2>
+                <p class="quoteUrl hidden">${quotes[i].url}</p>
+              </div>
+             `;
+        } else {
+            htmlQuote += `
+              <div class="card">
+                <h1>'${quote}'</h1>
+                <h2>${quotes[i].author}</h2>
+              </div>
+               `;
+        }
     }
-  }
+
+    quoteContainer.html(htmlQuote);
 }
 
 
@@ -61,7 +67,7 @@ function getAuthorsList() {
 
     $.get(authorsApi, function(authorsData, status) {
         if (status === 'success') {
-            for (var i = 0; i < authorsData.results.length; i++) {
+            for (let i = 0; i < authorsData.results.length; i++) {
                 let author = {
                     name: authorsData.results[i].name,
                     url: authorsData.results[i].url,
@@ -78,31 +84,46 @@ function getAuthorsList() {
 }
 
 function printAuthors() {
-  authorsContainer.classList.toggle('hidden');
-    authorsContainer.innerHTML = '';
-    for (var i = 0; i < authors.length; i++) {
-        authorsContainer.innerHTML += `
-    <div class="author-btn">
-      ${authors[i].name}
-    </div>
-   `;
+    authorsContainer.toggleClass('hidden');     
+    let htmlAuthor = '';
+
+    for (let i = 0; i < authors.length; i++) {
+        htmlAuthor += `
+            <div class="author-btn">
+              ${authors[i].name}
+            </div>
+           `;
     }
+
+    authorsContainer.html(htmlAuthor);
+}
+
+function loadQuoteDetail() {
+    let quoteUrl = $(this).find('.quoteUrl');
 }
 
 getApiQuotes();
 getAuthorsList();
 
-getButtonQuote.addEventListener('click', getApiQuotes);
-authorsButton.addEventListener('click', printAuthors);
+getButtonQuote.click(getApiQuotes);
+authorsButton.click(printAuthors);
+
+$(document).click('.card', loadQuoteDetail);
 
 //////////// Modal///////////
 
 function modalToggle() {
-  const filterModal = document.querySelector('.js-filter-modal');
-  filterModal.classList.toggle('hidden');
-  const body = document.querySelector('body');
-  body.classList.toggle('overflow-hidden');
+    const filterModal = document.querySelector('.js-filter-modal');
+    filterModal.classList.toggle('hidden');
+    const body = document.querySelector('body');
+    body.classList.toggle('overflow-hidden');
 }
 
-filterButton.addEventListener('click', modalToggle);
-closeFilterButton.addEventListener('click', modalToggle);
+filterButton.click(modalToggle);
+closeFilterButton.click(modalToggle);
+
+// $(".js-filter-modal").on("show", function () {
+//   $("body").addClass("overflow-hidden");
+// }).on("hidden", function () {
+//   $("body").removeClass("overflow-hidden")
+// });
