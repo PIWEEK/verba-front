@@ -10,6 +10,8 @@ const tagsButton = $(document).find('.js-tags-link');
 const filterButton = $(document).find('.js-filter-btn');
 const applyFilter = $(document).find('.js-apply-filter-btn');
 const closeFilterButton = $(document).find('.js-close-btn');
+const manifestoContainer = $(document).find('#manifesto');
+const manifestoButton = $(document).find('#manifesto-btn');
 
 
 //////////// Quotes ///////////
@@ -178,6 +180,10 @@ authorsButton.click(function() {
 
 tagsButton.click(function() {
     tagsContainer.toggleClass('hidden');
+});
+
+manifestoButton.click(function() {
+    quotes.showManifest();
 });
 
 applyFilter.click(function() {

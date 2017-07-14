@@ -34,3 +34,21 @@ header {
   padding-left: 60px;
   font-family: 'Merriweather';
 }
+
+.manifesto {
+  width: 100%;
+}
+
+.manifesto .verba {
+  color: #0f00ff;
+  font-family: Merryweather;
+  font-weight: bold;
+}
+
+.manifesto a:link,
+.manifesto a:visited,
+.manifesto a:hover,
+.manifesto a:active {
+  text-decoration: none;
+  text-color: #0f00ff;
+}
