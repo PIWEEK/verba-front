@@ -68,8 +68,12 @@ body {
     margin-top: 5px;
     margin-bottom: 5px; }
 
-.logo-twitter {
-  margin-top: 20px; }
+footer p {
+  padding-left: 5px; }
+
+footer .logo-twitter {
+  margin-top: 20px;
+  margin-left: 60px; }
 
 .filter-modal {
   background-color: rgba(0, 0, 0, 0.6);
