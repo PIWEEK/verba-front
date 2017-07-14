@@ -45,6 +45,9 @@ $('.js-back-btn').click(function() {
 $(document).on('click', '.filter-option-btn', function(event){
     let author_btn = $(event.target);
     author_btn.toggleClass("selected");
+
+    let filterQuotesUrl = getCountFilteredQuotesUrl();
+    Quote.getNumOfFilteredQuotes(filterQuotesUrl);
 });
 
 function getAuthorsList() {

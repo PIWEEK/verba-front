@@ -8,6 +8,7 @@ let Quote = (function(){
 
     let quoteContainer = $(document).find('#quotes-container');
     let loadMoreButton = $(document).find('#load-more-quotes');
+    let applyFilterButton = $(document).find('.js-apply-filter-btn');
     let nextQuotesUrl = mainApi + 'quotes';
 
     let printTags = function(tags) {
@@ -99,12 +100,35 @@ let Quote = (function(){
 
     };
 
+
     quote.getFilteredQuotes = function(filterUrl) {
         nextQuotesUrl = filterUrl;
         quoteContainer.html('');
 
         Quote.getQuotes();
     };
+
+
+    let printNumOfQuotes = function(numOfQuotes) {
+      applyFilterButton.show();
+      if (numOfQuotes ==  0) {
+          applyFilterButton.hide();
+      }  else {
+          applyFilterButton.text(`Ver ${numOfQuotes} resultados`);
+      }
+    };
+
+
+    quote.getNumOfFilteredQuotes = function (filterUrl) {
+      $.get(filterUrl, function(numOfQuotesData, status) {
+          if (status === 'success') {
+              printNumOfQuotes(numOfQuotesData);
+          } else {
+              console.log('Error del servidor, puede que el archivo no exista o que se haya producido un error interno en el servidor');
+          }
+      });
+    };
+
 
     quote.showDetail = function() {
         $('#quotes-list').hide();
