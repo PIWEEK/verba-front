@@ -12,6 +12,7 @@ const applyFilter = $(document).find('.js-apply-filter-btn');
 const closeFilterButton = $(document).find('.js-close-btn');
 const manifestoContainer = $(document).find('#manifesto');
 const manifestoButton = $(document).find('#manifesto-btn');
+const homeButton = $(document).find('#logo-home');
 
 
 //////////// Quotes ///////////
@@ -184,6 +185,10 @@ tagsButton.click(function() {
 
 manifestoButton.click(function() {
     quotes.showManifest();
+});
+
+homeButton.click(function() {
+    quotes.showHome();
 });
 
 applyFilter.click(function() {
