@@ -27,6 +27,22 @@ header {
       display: inline-block;
       margin: 0; }
 
+.footer {
+  background-color: #0f00ff;
+  height: 60px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center; }
+
+.footer p {
+  color: white;
+  font-weight: bold;
+  padding-left: 60px;
+  font-family: 'Merriweather'; }
+
 .filter-modal {
   background-color: rgba(0, 0, 0, 0.6);
   position: fixed;
