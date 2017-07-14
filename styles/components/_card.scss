@@ -75,3 +75,16 @@
   color: #000000;
   margin-left: $margin-frame;
 }
+
+.quote-tag{
+  box-shadow: 0 8px 30px 0 rgba(227, 227, 227, 0.38);
+  display: inline-block;
+  font-family: 'Inconsolata';
+  font-size: 14px;
+  text-align: center;
+  padding-left: 32px;
+  padding-right: 32px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  margin-bottom: 5px;
+}
