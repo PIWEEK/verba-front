@@ -1,7 +1,6 @@
 'use strict';
 //////////// API request ///////////
 const authorsApi = mainApi + 'authors/?page_size=200';
-const quotesApi = mainApi + 'quotes/';
 const tagsApi = mainApi + 'tags/?page_size=200';
 const authorsContainer = $(document).find('.js-authors-container');
 const tagsContainer = $(document).find('.js-tags-container');
@@ -10,15 +9,29 @@ const tagsButton = $(document).find('.js-tags-link');
 const filterButton = $(document).find('.js-filter-btn');
 const applyFilter = $(document).find('.js-apply-filter-btn');
 const closeFilterButton = $(document).find('.js-close-btn');
-const manifestoContainer = $(document).find('#manifesto');
 const manifestoButton = $(document).find('#manifesto-btn');
 const homeButton = $(document).find('#logo-home');
 
 
 //////////// Quotes ///////////
 
+let WindowManager = (function() {
+   let windowManager = {};
+
+   windowManager.showHome = function() {
+        Quote.refreshQuotes();
+   };
+
+   windowManager.showManifest = function() {
+        Quote.hideAll();
+       manifestoContainer.show();
+   };
+
+   return windowManager;
+})();
+
 $(function() {
-    Quote.getQuotes();
+    Quote.refreshQuotes();
 });
 
 
@@ -37,14 +50,41 @@ $('.js-load-quotes-btn').click(function() {
 });
 
 $('.js-back-btn').click(function() {
-    Quote.hideDetail();
+    Quote.showQuotesList();
 });
 
-//////////// Filters ///////////
+//////////// Filters modal ///////////
 
-$(document).on('click', '.filter-option-btn', function(event){
+$(document).on('click', '.filter-option-btn.js-author', function(event){
     let author_btn = $(event.target);
-    author_btn.toggleClass("selected");
+    author_btn.toggleClass('selected');
+
+    let author = {
+        id: $(author_btn).attr('id'),
+        name: $(author_btn).find('p').text(),
+    };
+
+    if (author_btn.hasClass('selected')) {
+        Filters.addAuthor(author);
+    } else {
+        Filters.removeAuthor(author.id);
+    }
+
+    let filterQuotesUrl = getCountFilteredQuotesUrl();
+    Quote.getNumOfFilteredQuotes(filterQuotesUrl);
+});
+
+$(document).on('click', '.filter-option-btn.js-tag', function(event){
+    let tag_btn = $(event.target);
+    tag_btn.toggleClass('selected');
+
+    let tag = $(tag_btn).attr('id');
+
+    if (tag_btn.hasClass('selected')) {
+        Filters.addTag(tag);
+    } else{
+        Filters.removeTag(tag);
+    }
 
     let filterQuotesUrl = getCountFilteredQuotesUrl();
     Quote.getNumOfFilteredQuotes(filterQuotesUrl);
@@ -121,59 +161,11 @@ function printTags(tags) {
 function getCountFilteredQuotesUrl() {
     let urlFilters = quotesApi + 'count?';
 
-    return buildFilteredQuotesUrl(urlFilters);
-}
-
-function getFilteredQuotesUrl() {
-    let urlFilters = quotesApi + '?';
-
-    return buildFilteredQuotesUrl(urlFilters);
-}
-
-
-function buildFilteredQuotesUrl(urlFilters) {
-    let selectedAuthors = $('.js-author.selected');
-    let selectedAuthorsSize = selectedAuthors.size();
-
-    if (selectedAuthorsSize > 0) {
-        urlFilters += 'author=';
-
-        for (let i = 0; i < selectedAuthorsSize; i++) {
-            urlFilters += $(selectedAuthors[i]).attr('id');
-
-            if (i < selectedAuthorsSize - 1) {
-                urlFilters += ',';
-            } else {
-                urlFilters +='&';
-            }
-        }
-    }
-
-    let selectedTags = $('.js-tag.selected');
-    let selectedTagsSize = selectedTags.size();
-
-    if (selectedTagsSize > 0) {
-        urlFilters += 'tags=';
-
-        for (let i = 0; i < selectedTagsSize; i++) {
-            urlFilters += $(selectedTags[i]).attr('id');
-
-            if (i < selectedTagsSize - 1) {
-                urlFilters += ',';
-            }
-        }
-    }
-
-    return urlFilters;
-}
-
-function modalToggle() {
-    $(document).find('.js-filter-modal').toggleClass('hidden');
-    $(document).find('body').toggleClass('overflow-hidden');
+    return Filters.countPotentialFilteredQuotes();
 }
 
 filterButton.click(function() {
-    modalToggle();
+    Filters.showFilterModal();
     getAuthorsList();
     getTagsList();
 });
@@ -187,17 +179,15 @@ tagsButton.click(function() {
 });
 
 manifestoButton.click(function() {
-    quotes.showManifest();
+    WindowManager.showManifest();
 });
 
 homeButton.click(function() {
-    quotes.showHome();
+    WindowManager.showHome();
 });
 
 applyFilter.click(function() {
-    let filterQuotesUrl = getFilteredQuotesUrl();
-    Quote.getFilteredQuotes(filterQuotesUrl);
-    modalToggle();
+    Filters.applyFilters();
 });
 
-closeFilterButton.click(modalToggle);
+closeFilterButton.click(Filters.hideFilterModal());

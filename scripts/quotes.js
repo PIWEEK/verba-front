@@ -1,6 +1,8 @@
 'use strict';
 
 const mainApi = 'http://verba-mujer.es/api/';
+const quotesApi = mainApi + 'quotes/';
+const manifestoContainer = $(document).find('#manifesto');
 
 let Quote = (function(){
 
@@ -9,7 +11,7 @@ let Quote = (function(){
     let quoteContainer = $(document).find('#quotes-container');
     let loadMoreButton = $(document).find('#load-more-quotes');
     let applyFilterButton = $(document).find('.js-apply-filter-btn');
-    let nextQuotesUrl = mainApi + 'quotes';
+    let nextQuotesUrl = quotesApi;
 
     let printTags = function(tags) {
         let tagsHtml = '';
@@ -95,9 +97,9 @@ let Quote = (function(){
             } else {
                 console.log('Error del servidor, puede que el archivo no exista o que se haya producido un error interno en el servidor');
             }
-
         });
 
+        quote.showQuotesList();
     };
 
 
@@ -107,7 +109,6 @@ let Quote = (function(){
 
         Quote.getQuotes();
     };
-
 
     let printNumOfQuotes = function(numOfQuotes) {
       applyFilterButton.show();
@@ -135,23 +136,33 @@ let Quote = (function(){
     };
 
 
+    quote.refreshQuotes = function() {
+        quote.getFilteredQuotes(quotesApi);
+    };
+
     quote.showDetail = function() {
         $('#quotes-list').hide();
         loadMoreButton.hide();
 
         $('#quote-detail').show();
+        manifestoContainer.hide();
     };
 
-    quote.hideDetail = function() {
+    quote.showQuotesList = function() {
         $('#quotes-list').show();
         printLoadMoreButton();
 
         $('#quote-detail').hide();
+        manifestoContainer.hide();
+    };
+
+    quote.hideAll = function() {
+        $('#quotes-list').hide();
+        loadMoreButton.hide();
+        $('#quote-detail').hide();
     };
 
     quote.printQuoteDetail = function(quoteData) {
-        Quote.showDetail();
-
         let quoteDetail = $('#quote-detail');
         let author = quoteData.author;
 
@@ -174,6 +185,8 @@ let Quote = (function(){
         let quoteDetailContainer = quoteDetail.find('.related-quotes');
         quoteDetailContainer.html('');
         printQuotes(quotes, quoteDetailContainer);
+
+        Quote.showDetail();
     };
 
     return quote;

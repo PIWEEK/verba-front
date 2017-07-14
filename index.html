@@ -10,12 +10,12 @@
 </head>
 <body>
 <header>
-    <div class="logo-container">
-        <h1 class="logo-text" id="logo-home">verba.</h1>
+    <div id="logo-home" class="logo-container">
+        <h1 class="logo-text">verba.</h1>
     </div>
-    <div class="nav-container">
+    <div id="manifesto-btn" class="nav-container">
         <ul class="nav">
-            <li id="manifesto-btn">manifiesto</li>
+            <li>manifiesto</li>
         </ul>
     </div>
 </header>
@@ -27,6 +27,10 @@
             <button type="button" name="button" class="js-filter-btn filter-btn">Filtrar</button>
         </div>
 
+        <div id="filters-applied-container">
+            <div id="author-filters-applied"></div>
+            <div id="tag-filters-applied"></div>
+        </div>
         <div id="quotes-container" class="quotes-container">
         </div>
 
@@ -121,6 +125,7 @@
 
 <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
 <script src="scripts/quotes.js" charset="utf-8"></script>
+<script src="scripts/filters.js" charset="utf-8"></script>
 <script src="scripts/main.js" charset="utf-8"></script>
 </body>
 </html>
