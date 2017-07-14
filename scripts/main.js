@@ -182,4 +182,6 @@ applyFilter.click(function() {
     Filters.applyFilters();
 });
 
-closeFilterButton.click(Filters.hideFilterModal());
+closeFilterButton.click(function() {
+    Filters.hideFilterModal();
+});
