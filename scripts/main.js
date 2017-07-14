@@ -70,8 +70,7 @@ $(document).on('click', '.filter-option-btn.js-author', function(event){
         Filters.removeAuthor(author.id);
     }
 
-    let filterQuotesUrl = getCountFilteredQuotesUrl();
-    Quote.getNumOfFilteredQuotes(filterQuotesUrl);
+    Filters.getNumOfFilteredQuotes();
 });
 
 $(document).on('click', '.filter-option-btn.js-tag', function(event){
@@ -86,8 +85,7 @@ $(document).on('click', '.filter-option-btn.js-tag', function(event){
         Filters.removeTag(tag);
     }
 
-    let filterQuotesUrl = getCountFilteredQuotesUrl();
-    Quote.getNumOfFilteredQuotes(filterQuotesUrl);
+    Filters.getNumOfFilteredQuotes();
 });
 
 function getAuthorsList() {
@@ -157,12 +155,6 @@ function printTags(tags) {
     tagsContainer.html(htmlTag);
 }
 
-
-function getCountFilteredQuotesUrl() {
-    let urlFilters = quotesApi + 'count?';
-
-    return Filters.countPotentialFilteredQuotes();
-}
 
 filterButton.click(function() {
     Filters.showFilterModal();

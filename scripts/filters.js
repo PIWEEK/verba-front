@@ -6,6 +6,7 @@ let Filters = (function(){
 
     let authorFiltersAppliedContainer = $(document).find('#author-filters-applied');
     let tagFiltersAppliedContainer = $(document).find('#tag-filters-applied');
+    let applyFilterButton = $(document).find('.js-apply-filter-btn');
     let authors = [];
     let tags = [];
 
@@ -59,6 +60,15 @@ let Filters = (function(){
         return urlFilters;
     };
 
+    let printNumOfQuotes = function(numOfQuotes) {
+        applyFilterButton.show();
+        if (numOfQuotes ===  0) {
+            applyFilterButton.hide();
+        }  else {
+            applyFilterButton.text(`Ver ${numOfQuotes} resultados`);
+        }
+    };
+
     let printAppliedFilters = function() {
         let authorFilterHtml = '';
         for (let i = 0; i < authors.length; i++) {
@@ -108,17 +118,23 @@ let Filters = (function(){
         })
     };
 
+    filters.getNumOfFilteredQuotes = function () {
+        let filterUrl = buildFilteredQuotesUrl(quotesApi + 'count?');
+
+        $.get(filterUrl, function(numOfQuotesData, status) {
+            if (status === 'success') {
+                printNumOfQuotes(numOfQuotesData);
+            } else {
+                console.log('Error del servidor, puede que el archivo no exista o que se haya producido un error interno en el servidor');
+            }
+        });
+    };
+
     filters.applyFilters = function() {
         printAppliedFilters();
         let filterQuotesUrl = buildFilteredQuotesUrl(quotesApi + '?');
         Quote.getFilteredQuotes(filterQuotesUrl);
         filters.hideFilterModal();
-    };
-
-    filters.countPotentialFilteredQuotes = function() {
-        let filterQuotesUrl = buildFilteredQuotesUrl(quotesApi + 'count?');
-        Quote.getFilteredQuotes(filterQuotesUrl);
-
     };
 
     filters.showFilterModal = function () {

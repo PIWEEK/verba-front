@@ -110,32 +110,6 @@ let Quote = (function(){
         Quote.getQuotes();
     };
 
-    let printNumOfQuotes = function(numOfQuotes) {
-      applyFilterButton.show();
-
-      if ($(document).find('.filter-option-btn.selected').length <= 0) {
-          applyFilterButton.text(`Aplicar`);
-      } else {
-        if (numOfQuotes ==  0) {
-            applyFilterButton.hide();
-        }  else {
-            applyFilterButton.text(`Ver ${numOfQuotes} resultados`);
-        }
-      }
-    };
-
-
-    quote.getNumOfFilteredQuotes = function (filterUrl) {
-      $.get(filterUrl, function(numOfQuotesData, status) {
-          if (status === 'success') {
-              printNumOfQuotes(numOfQuotesData);
-          } else {
-              console.log('Error del servidor, puede que el archivo no exista o que se haya producido un error interno en el servidor');
-          }
-      });
-    };
-
-
     quote.refreshQuotes = function() {
         quote.getFilteredQuotes(quotesApi);
     };
