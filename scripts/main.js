@@ -112,9 +112,20 @@ function printTags(tags) {
 }
 
 
-function buildFilteredQuotesUrl() {
+function getCountFilteredQuotesUrl() {
+    let urlFilters = quotesApi + 'count?';
+
+    return buildFilteredQuotesUrl(urlFilters);
+}
+
+function getFilteredQuotesUrl() {
     let urlFilters = quotesApi + '?';
 
+    return buildFilteredQuotesUrl(urlFilters);
+}
+
+
+function buildFilteredQuotesUrl(urlFilters) {
     let selectedAuthors = $('.js-author.selected');
     let selectedAuthorsSize = selectedAuthors.size();
 
@@ -170,7 +181,7 @@ tagsButton.click(function() {
 });
 
 applyFilter.click(function() {
-    let filterQuotesUrl = buildFilteredQuotesUrl();
+    let filterQuotesUrl = getFilteredQuotesUrl();
     Quote.getFilteredQuotes(filterQuotesUrl);
     modalToggle();
 });
