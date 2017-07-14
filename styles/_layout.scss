@@ -5,3 +5,17 @@ header {
   align-items: flex-end;
   padding-bottom: 27px;
 }
+
+.footer {
+  background-color: #0f00ff;
+  height: 60px;
+  display: flex;
+  align-items: center;
+}
+
+.footer p {
+  color: white;
+  font-weight: bold;
+  padding-left: 60px;
+}
+
