@@ -111,10 +111,15 @@ let Quote = (function(){
 
     let printNumOfQuotes = function(numOfQuotes) {
       applyFilterButton.show();
-      if (numOfQuotes ==  0) {
-          applyFilterButton.hide();
-      }  else {
-          applyFilterButton.text(`Ver ${numOfQuotes} resultados`);
+
+      if ($(document).find('.filter-option-btn.selected').length <= 0) {
+          applyFilterButton.text(`Aplicar`);
+      } else {
+        if (numOfQuotes ==  0) {
+            applyFilterButton.hide();
+        }  else {
+            applyFilterButton.text(`Ver ${numOfQuotes} resultados`);
+        }
       }
     };
 
