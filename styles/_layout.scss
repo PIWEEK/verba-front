@@ -41,14 +41,15 @@ body{
 
 .manifesto {
   width: 100%;
-  margin: $margin-frame;
+  padding: $margin-frame;
   .verba {
    color: #0f00ff;
    font-family: 'Merryweather';
    font-weight: bold;
  }
   p{
-   font-family: 'Merryweather-Regular'
+   font-family: 'Merryweather';
+   font-size: 46px;
   }
 
   a:link,
@@ -62,6 +63,7 @@ body{
  h1 {
    font-family: 'Merryweather';
    font-weight: bold;
+   font-size: 46px;
    margin-top: 5px;
    margin-bottom: 5px;
  }

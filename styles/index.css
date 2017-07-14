@@ -47,13 +47,14 @@ body {
 
 .manifesto {
   width: 100%;
-  margin: 70px; }
+  padding: 70px; }
   .manifesto .verba {
     color: #0f00ff;
     font-family: 'Merryweather';
     font-weight: bold; }
   .manifesto p {
-    font-family: "Merryweather-Regular"; }
+    font-family: 'Merryweather';
+    font-size: 46px; }
   .manifesto a:link,
   .manifesto a:visited,
   .manifesto a:hover,
@@ -63,8 +64,12 @@ body {
   .manifesto h1 {
     font-family: 'Merryweather';
     font-weight: bold;
+    font-size: 46px;
     margin-top: 5px;
     margin-bottom: 5px; }
+
+.logo-twitter {
+  margin-top: 20px; }
 
 .filter-modal {
   background-color: rgba(0, 0, 0, 0.6);
@@ -235,23 +240,26 @@ button:focus {
   background-color: transparent;
   -webkit-box-shadow: none;
           box-shadow: none;
-  outline-style: none; }
+  outline-style: none;
+  cursor: pointer; }
 
 .filter-btn {
   width: 120px;
   height: 40px;
   border: solid 4px #0f00ff;
-  font-family: Inconsolata;
+  font-family: 'Inconsolata';
   font-size: 14px;
   font-weight: bold;
   text-align: center;
-  color: #000000; }
+  color: #000000;
+  cursor: pointer; }
 
 .buttom_more {
   width: 90px;
   height: 90px;
   -o-object-fit: contain;
-     object-fit: contain; }
+     object-fit: contain;
+  cursor: pointer; }
 
 .filter-option-btn {
   -webkit-box-shadow: 0 8px 30px 0 rgba(227, 227, 227, 0.38);
@@ -263,20 +271,24 @@ button:focus {
   padding-left: 32px;
   padding-right: 32px;
   padding-top: 12px;
-  padding-bottom: 12px; }
+  padding-bottom: 12px;
+  margin-bottom: 5px;
+  cursor: pointer; }
 
 .filter-option-btn.selected {
   -webkit-box-shadow: 0 8px 30px 0 rgba(64, 62, 246, 0.31);
           box-shadow: 0 8px 30px 0 rgba(64, 62, 246, 0.31);
   background-color: #3d3bee;
   display: inline-block;
-  font-family: Inconsolata;
+  font-family: 'Inconsolata';
   font-size: 14px;
   text-align: center;
   padding-left: 32px;
   padding-right: 32px;
   padding-top: 12px;
-  padding-bottom: 12px; }
+  padding-bottom: 12px;
+  margin-bottom: 5px;
+  cursor: pointer; }
 
 .modal-filter-btn {
   width: 100%;
@@ -287,7 +299,8 @@ button:focus {
   text-align: center;
   color: #0f00ff;
   padding-top: 25px;
-  padding-bottom: 25px; }
+  padding-bottom: 25px;
+  cursor: pointer; }
 
 .hidden {
   display: none; }
@@ -299,4 +312,5 @@ button:focus {
 
 body.overflow-hidden {
   overflow: hidden; }
+
 /*# sourceMappingURL=index.css.map */

@@ -5,23 +5,26 @@ button:focus {
     background-color: transparent;
     box-shadow: none;
     outline-style: none;
+    cursor: pointer;
 }
 
 .filter-btn {
     width: 120px;
     height: 40px;
     border: solid 4px #0f00ff;
-    font-family: Inconsolata;
+    font-family: 'Inconsolata';
     font-size: 14px;
     font-weight: bold;
     text-align: center;
     color: #000000;
+    cursor: pointer;
 }
 
 .buttom_more {
     width: 90px;
     height: 90px;
     object-fit: contain;
+    cursor: pointer;
 }
 
 .filter-option-btn {
@@ -35,13 +38,14 @@ button:focus {
     padding-top: 12px;
     padding-bottom: 12px;
     margin-bottom: 5px;
+    cursor: pointer;
 }
 
 .filter-option-btn.selected {
   box-shadow: 0 8px 30px 0 rgba(64, 62, 246, 0.31);
   background-color: #3d3bee;
   display: inline-block;
-  font-family: Inconsolata;
+  font-family: 'Inconsolata';
   font-size: 14px;
   text-align: center;
   padding-left: 32px;
@@ -49,6 +53,7 @@ button:focus {
   padding-top: 12px;
   padding-bottom: 12px;
   margin-bottom: 5px;
+  cursor: pointer;
 }
 
 
@@ -61,5 +66,6 @@ button:focus {
   text-align: center;
   color: #0f00ff;
   padding-top: 25px;
-  padding-bottom: 25px
+  padding-bottom: 25px;
+  cursor: pointer;
 }
