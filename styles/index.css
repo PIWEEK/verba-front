@@ -43,6 +43,21 @@ header {
   padding-left: 60px;
   font-family: 'Merriweather'; }
 
+.manifesto {
+  width: 100%; }
+
+.manifesto .verba {
+  color: #0f00ff;
+  font-family: Merryweather;
+  font-weight: bold; }
+
+.manifesto a:link,
+.manifesto a:visited,
+.manifesto a:hover,
+.manifesto a:active {
+  text-decoration: none;
+  text-color: #0f00ff; }
+
 .filter-modal {
   background-color: rgba(0, 0, 0, 0.6);
   position: fixed;
@@ -58,7 +73,8 @@ header {
   height: 100vh;
   padding-left: 62px;
   padding-right: 62px;
-  overflow: scroll; }
+  overflow: scroll;
+  position: relative; }
 
 .filters-modal-container {
   width: 100%;
@@ -69,19 +85,26 @@ header {
       -ms-flex-pack: justify;
           justify-content: space-between; }
   .filters-modal-container p {
-    font-family: Inconsolata;
+    font-family: 'Inconsolata';
     font-size: 20px;
     font-weight: bold;
     line-height: 1.8; }
 
-.modal-tags-container h3 {
-  font-family: Merriweather;
+h3 {
+  font-family: 'Merriweather';
   font-size: 72px;
   font-weight: bold;
   line-height: 0.5;
   text-align: left;
   color: #0f00ff;
   cursor: pointer; }
+
+.modal-filter-button-container {
+  background-color: white;
+  position: fixed;
+  width: 457px;
+  bottom: 67px;
+  z-index: 1; }
 
 .nav {
   margin-right: 70px; }
@@ -185,7 +208,8 @@ button:focus {
   background-image: none;
   background-color: transparent;
   -webkit-box-shadow: none;
-          box-shadow: none; }
+          box-shadow: none;
+  outline-style: none; }
 
 .filter-btn {
   width: 120px;
@@ -215,6 +239,17 @@ button:focus {
   padding-top: 12px;
   padding-bottom: 12px; }
 
+.modal-filter-btn {
+  width: 100%;
+  border: solid 4px #0f00ff;
+  font-family: 'Merriweather';
+  font-size: 36px;
+  font-weight: bold;
+  text-align: center;
+  color: #0f00ff;
+  padding-top: 25px;
+  padding-bottom: 25px; }
+
 .hidden {
   display: none; }
 
@@ -225,5 +260,3 @@ button:focus {
 
 body.overflow-hidden {
   overflow: hidden; }
-
-/*# sourceMappingURL=index.css.map */
