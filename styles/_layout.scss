@@ -21,41 +21,48 @@ header {
 
 }
 
-.footer {
+footer {
   background-color: #0f00ff;
   height: 60px;
   display: flex;
   align-items: center;
+  p {
+   color: white;
+   font-weight: bold;
+   padding-left: 60px;
+   font-family: 'Merriweather';
+ }
 }
 
-.footer p {
-  color: white;
-  font-weight: bold;
-  padding-left: 60px;
-  font-family: 'Merriweather';
+body{
+  margin:0;
 }
+
 
 .manifesto {
   width: 100%;
-}
+  margin: $margin-frame;
+  .verba {
+   color: #0f00ff;
+   font-family: 'Merryweather';
+   font-weight: bold;
+ }
+  p{
+   font-family: 'Merryweather-Regular'
+  }
 
-.manifesto .verba {
-  color: #0f00ff;
-  font-family: Merryweather;
-  font-weight: bold;
-}
+  a:link,
+  a:visited,
+  a:hover,
+  a:active {
+   text-decoration: none;
+   color: #0f00ff;
+ }
 
-.manifesto a:link,
-.manifesto a:visited,
-.manifesto a:hover,
-.manifesto a:active {
-  text-decoration: none;
-  text-color: #0f00ff;
-}
-
-.manifesto h1 {
-  font-family: Merryweather;
-  font-weight: bold;
-  margin-top: 5px;
-  margin-bottom: 5px;
+ h1 {
+   font-family: 'Merryweather';
+   font-weight: bold;
+   margin-top: 5px;
+   margin-bottom: 5px;
+ }
 }

@@ -27,7 +27,7 @@ header {
       display: inline-block;
       margin: 0; }
 
-.footer {
+footer {
   background-color: #0f00ff;
   height: 60px;
   display: -webkit-box;
@@ -36,27 +36,35 @@ header {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center; }
+  footer p {
+    color: white;
+    font-weight: bold;
+    padding-left: 60px;
+    font-family: 'Merriweather'; }
 
-.footer p {
-  color: white;
-  font-weight: bold;
-  padding-left: 60px;
-  font-family: 'Merriweather'; }
+body {
+  margin: 0; }
 
 .manifesto {
-  width: 100%; }
-
-.manifesto .verba {
-  color: #0f00ff;
-  font-family: Merryweather;
-  font-weight: bold; }
-
-.manifesto a:link,
-.manifesto a:visited,
-.manifesto a:hover,
-.manifesto a:active {
-  text-decoration: none;
-  text-color: #0f00ff; }
+  width: 100%;
+  margin: 70px; }
+  .manifesto .verba {
+    color: #0f00ff;
+    font-family: 'Merryweather';
+    font-weight: bold; }
+  .manifesto p {
+    font-family: "Merryweather-Regular"; }
+  .manifesto a:link,
+  .manifesto a:visited,
+  .manifesto a:hover,
+  .manifesto a:active {
+    text-decoration: none;
+    color: #0f00ff; }
+  .manifesto h1 {
+    font-family: 'Merryweather';
+    font-weight: bold;
+    margin-top: 5px;
+    margin-bottom: 5px; }
 
 .filter-modal {
   background-color: rgba(0, 0, 0, 0.6);
@@ -260,3 +268,5 @@ button:focus {
 
 body.overflow-hidden {
   overflow: hidden; }
+
+/*# sourceMappingURL=index.css.map */
