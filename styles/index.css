@@ -10,10 +10,22 @@ header {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  -webkit-box-align: end;
-      -ms-flex-align: end;
-          align-items: flex-end;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   padding-bottom: 27px; }
+  header .logo-container {
+    margin-left: 70px; }
+    header .logo-container .logo-text {
+      color: #0f00ff;
+      font-family: 'Merriweather';
+      font-size: 60px;
+      font-weight: bold;
+      line-height: 1.8;
+      padding-left: 16px;
+      text-align: center;
+      display: inline-block;
+      margin: 0; }
 
 .filter-modal {
   background-color: rgba(0, 0, 0, 0.6);
@@ -46,7 +58,7 @@ header {
     font-weight: bold;
     line-height: 1.8; }
 
-.modal-filter-list h3 {
+.modal-tags-container h3 {
   font-family: Merriweather;
   font-size: 72px;
   font-weight: bold;
@@ -74,13 +86,6 @@ header {
     text-align: center;
     color: #000000;
     background-color: white; }
-
-.logo-container {
-  margin-left: 70px;
-  width: 200px;
-  height: 62px;
-  -o-object-fit: contain;
-     object-fit: contain; }
 
 .filters-container {
   padding-right: 70px;
@@ -131,18 +136,6 @@ header {
     text-align: left;
     color: #000000; }
 
-.quote-tag {
-    -webkit-box-shadow: 0 8px 8px 0 rgba(227, 227, 227, 0.38);
-    box-shadow: 0 8px 8px 0 rgba(227, 227, 227, 0.38);
-    display: inline-block;
-    font-family: Inconsolata;
-    font-size: 14px;
-    text-align: center;
-    padding-left: 8px;
-    padding-right: 8px;
-    padding-top: 8px;
-    padding-bottom: 8px; }
-
 .quote-detail-container {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -161,18 +154,6 @@ header {
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
   margin-left: 70px; }
-
-.back-btn {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    width: 120px;
-    height: 40px;
-    border: solid 4px #0f00ff;
-    font-family: Inconsolata;
-    font-size: 14px;
-    font-weight: bold;
-    text-align: center;
-    color: #000000; }
 
 .discover {
   font-family: Inconsolata;
@@ -217,20 +198,6 @@ button:focus {
   padding-right: 32px;
   padding-top: 12px;
   padding-bottom: 12px; }
-
-.filter-option-btn.selected {
-     -webkit-box-shadow: 0 8px 30px 0 rgba(64, 62, 246, 0.31);
-             box-shadow: 0 8px 30px 0 rgba(64, 62, 246, 0.31);
-     background-color: #3d3bee;
-     display: inline-block;
-     font-family: Inconsolata;
-     font-size: 14px;
-     text-align: center;
-     padding-left: 32px;
-     padding-right: 32px;
-     padding-top: 12px;
-     padding-bottom: 12px; }
-
 
 .hidden {
   display: none; }

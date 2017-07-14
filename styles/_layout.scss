@@ -2,8 +2,23 @@ header {
   height: 130px;
   display: flex;
   justify-content: space-between;
-  align-items: flex-end;
+  align-items: center;
   padding-bottom: 27px;
+  .logo-container{
+    margin-left: $margin-frame;
+    .logo-text{
+      color: #0f00ff;
+      font-family: 'Merriweather';
+      font-size: 60px;
+      font-weight: bold;
+      line-height: 1.8;
+      padding-left: 16px;
+      text-align: center;
+      display: inline-block;
+      margin:0;
+    }
+  }
+
 }
 
 .footer {
