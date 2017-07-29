@@ -1,6 +1,6 @@
 'use strict';
 
-const mainApi = 'https://verba-mujer.es/api/';
+const mainApi = 'http://verba-mujer.es/api/';
 const quotesApi = mainApi + 'quotes/';
 const manifestoContainer = $(document).find('#manifesto');
 
